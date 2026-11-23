@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adnanbinsayeed.vercel.app/sitemap.xml
