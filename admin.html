@@ -152,7 +152,7 @@ const LISTS=['awards','projects','timeline','gallery'];
 async function load(){
   let saved={};try{const r=await fetch('/api/content?fresh=1',{cache:'no-store'});if(r.ok)saved=await r.json()}catch(e){}
   S={texts:{en:{},bn:{},ar:{}}};
-  for(const k of LISTS)S[k]=Array.isArray(saved[k])?saved[k]:clone(D[k=='timeline'?'timeline':k]);
+  for(const k of LISTS){if(Array.isArray(saved[k])){const extra=D[k].filter(x=>x.since&&(!saved.savedAt||x.since>saved.savedAt)&&!saved[k].some(y=>(y.href||y.img)&&(y.href||y.img)==(x.href||x.img)));S[k]=saved[k].concat(clone(extra))}else S[k]=clone(D[k])}
   if(saved.texts)for(const l of ['en','bn','ar'])S.texts[l]=Object.assign({},saved.texts[l]||{});
   dirty=false;setSt(saved.savedAt?'শেষ সেভ: '+new Date(saved.savedAt).toLocaleString('bn-BD'):'এখনো কিছু সেভ করা হয়নি, সাইটের আসল লেখা দেখাচ্ছে।');
   drawTabs();draw();
