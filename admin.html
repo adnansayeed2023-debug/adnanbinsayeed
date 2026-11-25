@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Adnan Bin Sayeed</title>
+<link rel="icon" href="logo.svg">
+<script>if(!/\.vercel\.app$/.test(location.hostname)&&!/^(localhost|127\.0\.0\.1)$/.test(location.hostname))location.replace('https://adnanbinsayeed.vercel.app/admin');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#041215;--bg2:#071b1f;--card:#0a2125;--ink:#eaf4f3;--soft:#9db6b8;--line:rgba(175,221,229,.12);--line2:rgba(175,221,229,.24);--apri:#FEAF76;--coral:#DA6D58;--sea:#0FA4AF;--ok:#3ddc97;--bad:#ff7a6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 Outfit,"Hind Siliguri",Cairo,system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--apri)}
+.wrap{width:min(1080px,100% - 28px);margin:auto}
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.lbox{width:min(400px,100%);background:var(--card);border:1px solid var(--line2);border-radius:26px;padding:32px}
+.lbox h1{margin:14px 0 4px;font-size:24px}.lbox p{color:var(--soft);margin:0 0 20px;font-size:14.5px}
+.lbox img{width:54px;height:54px}
+.in{width:100%;min-height:46px;padding:10px 14px;border-radius:14px;border:1px solid var(--line2);background:var(--bg2);outline:none}
+.in:focus{border-color:var(--apri)}
+textarea.in{min-height:84px;resize:vertical;line-height:1.5}
+.btn{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:var(--card);cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn:hover{border-color:var(--apri)}
+.btn.pri{background:linear-gradient(120deg,var(--apri),var(--coral));color:#1b0c07;border-color:transparent}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13.5px}
+.btn.dan{color:var(--bad)}
+.btn:disabled{opacity:.55;cursor:wait}
+.err{color:var(--bad);font-size:14px;min-height:22px;margin-top:10px}
+/* app */
+header{position:sticky;top:0;z-index:20;background:rgba(4,18,21,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:10px;padding:12px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;margin-inline-end:auto}
+.brand img{width:34px;height:34px}
+.brand small{display:block;font-weight:500;color:var(--soft);font-size:12.5px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:700;font-size:13.5px;color:var(--soft)}
+.seg button[aria-pressed=true]{background:var(--apri);color:#1b0c07}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 12px;scrollbar-width:none}
+.tabs button{flex:none;border:1px solid var(--line);background:none;border-radius:12px;padding:8px 14px;cursor:pointer;font-weight:600;color:var(--soft)}
+.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);border-color:var(--line2)}
+.status{font-size:13.5px;color:var(--soft)}
+.status.ok{color:var(--ok)}.status.bad{color:var(--bad)}.status.dirty{color:var(--apri)}
+main{padding:22px 0 80px}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.intro h2{margin:0;font-size:24px}.intro p{margin:4px 0 0;color:var(--soft);font-size:14.5px;max-width:60ch}
+.list{display:grid;gap:12px}
+details.item{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+details.item[open]{border-color:var(--line2)}
+details.item>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+details.item>summary::-webkit-details-marker{display:none}
+.thumb{width:56px;height:42px;border-radius:10px;background:var(--bg2) center/cover no-repeat;flex:none;border:1px solid var(--line)}
+.sum{flex:1;min-width:0}
+.sum b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sum span{font-size:13px;color:var(--soft)}
+.ctl{display:flex;gap:6px}
+.ctl button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);cursor:pointer}
+.ctl button:hover{border-color:var(--apri)}
+.body{padding:4px 16px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;border-top:1px solid var(--line)}
+.f{display:grid;gap:6px;align-content:start}
+.f.full{grid-column:1/-1}
+.f>span{font-size:13px;font-weight:600;color:var(--soft)}
+.f>span em{font-style:normal;color:var(--apri);font-weight:700}
+.f small{color:var(--soft);font-size:12.5px}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--apri)}
+.img{display:flex;gap:10px;align-items:center}
+.img .prev{width:96px;height:72px;border-radius:12px;background:var(--bg2) center/contain no-repeat;border:1px solid var(--line);flex:none}
+.img .in{flex:1}
+.tx{display:grid;gap:10px}
+.trow{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px}
+.trow .k{font:600 12px ui-monospace,monospace;color:var(--soft);display:flex;justify-content:space-between;gap:10px}
+.trow .k i{font-style:normal;color:var(--apri)}
+.trow .def{font-size:12.5px;color:var(--soft)}
+[dir=rtl] .in{direction:rtl}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.toast{position:fixed;bottom:18px;left:50%;translate:-50% 0;background:var(--card);border:1px solid var(--line2);padding:12px 18px;border-radius:14px;box-shadow:0 20px 40px -20px #000;z-index:50;display:none;max-width:calc(100% - 28px)}
+.toast.on{display:block}
+.help{background:linear-gradient(140deg,rgba(254,175,118,.12),transparent 60%),var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft);margin-bottom:16px}
+.help b{color:var(--ink)}
+@media(max-width:700px){.body{grid-template-columns:minmax(0,1fr)}.brand small{display:none}.hbar .btn span{display:none}}
+</style>
+</head>
+<body>
+<div class="login" id="login">
+  <form class="lbox" id="lf">
+    <img src="logo.svg" alt="">
+    <h1>অ্যাডমিন প্যানেল</h1>
+    <p>সাইট এডিট করতে পাসওয়ার্ড দাও।</p>
+    <input class="in" type="password" id="pw" autocomplete="current-password" placeholder="পাসওয়ার্ড" required>
+    <div class="err" id="lerr" role="alert"></div>
+    <button class="btn pri" type="submit" id="lbtn" style="width:100%;justify-content:center">ঢুকুন</button>
+  </form>
+</div>
+
+<div id="app" hidden>
+<header><div class="wrap">
+  <div class="hbar">
+    <div class="brand"><img src="logo.svg" alt=""><div>অ্যাডমিন প্যানেল<small>Adnan Bin Sayeed</small></div></div>
+    <div class="seg" role="group" aria-label="এডিটের ভাষা"><button type="button" data-l="bn">বাংলা</button><button type="button" data-l="en">EN</button><button type="button" data-l="ar">عربي</button></div>
+    <a class="btn sm" href="/" target="_blank" rel="noopener">👁 <span>সাইট দেখুন</span></a>
+    <button class="btn sm" type="button" id="logout">🚪 <span>বের হও</span></button>
+    <button class="btn pri" type="button" id="save">💾 সেভ করুন</button>
+  </div>
+  <div class="hbar" style="padding-top:0"><span class="status" id="st">লোড হচ্ছে…</span></div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</div></header>
+<main class="wrap" id="main"></main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data.js"></script>
+<script>
+(()=>{
+const D=window.SITE_DEFAULTS, $=id=>document.getElementById(id);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const esc=x=>String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const LN={bn:'বাংলা',en:'English',ar:'عربي'};
+let PW='',L='bn',TAB='awards',S=null,dirty=false;
+
+/* ---------- api ---------- */
+const call=async(body)=>{const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':PW},body:JSON.stringify(body)});
+  let j={};try{j=await r.json()}catch(e){}; if(r.status==401){logout('পাসওয়ার্ড ভুল বা বদলে গেছে।');throw new Error('auth')} if(!r.ok)throw new Error(j.error||('HTTP '+r.status)); return j};
+const toast=(m,ms=3500)=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),ms)};
+const setSt=(m,c='')=>{const s=$('st');s.textContent=m;s.className='status '+c};
+const markDirty=()=>{if(!dirty){dirty=true;setSt('● সেভ করা হয়নি এমন পরিবর্তন আছে','dirty')}};
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- login ---------- */
+const logout=msg=>{PW='';try{sessionStorage.removeItem('abs-admin')}catch(e){};$('app').hidden=true;$('login').hidden=false;$('lerr').textContent=msg||''};
+$('logout').onclick=()=>{if(dirty&&!confirm('সেভ না করা পরিবর্তন হারিয়ে যাবে। তবুও বের হবে?'))return;dirty=false;logout()};
+const enter=async pw=>{PW=pw;const b=$('lbtn');b.disabled=true;$('lerr').textContent='';
+  try{await call({action:'check'});try{sessionStorage.setItem('abs-admin',pw)}catch(e){};$('login').hidden=true;$('app').hidden=false;await load()}
+  catch(e){if(e.message!='auth')$('lerr').textContent='সার্ভারে সমস্যা: '+e.message}finally{b.disabled=false}};
+$('lf').onsubmit=e=>{e.preventDefault();enter($('pw').value)};
+try{const s=sessionStorage.getItem('abs-admin');if(s)enter(s)}catch(e){}
+
+/* ---------- state ---------- */
+const LISTS=['awards','projects','timeline','gallery'];
+async function load(){
+  let saved={};try{const r=await fetch('/api/content?fresh=1',{cache:'no-store'});if(r.ok)saved=await r.json()}catch(e){}
+  S={texts:{en:{},bn:{},ar:{}}};
+  for(const k of LISTS)S[k]=Array.isArray(saved[k])?saved[k]:clone(D[k=='timeline'?'timeline':k]);
+  if(saved.texts)for(const l of ['en','bn','ar'])S.texts[l]=Object.assign({},saved.texts[l]||{});
+  dirty=false;setSt(saved.savedAt?'শেষ সেভ: '+new Date(saved.savedAt).toLocaleString('bn-BD'):'এখনো কিছু সেভ করা হয়নি, সাইটের আসল লেখা দেখাচ্ছে।');
+  drawTabs();draw();
+}
+const getP=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
+const setP=(o,p,v)=>{const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];if(a[k]==null||typeof a[k]!='object')a[k]=/^\d+$/.test(ks[i+1])?[]:{};a=a[k]}a[ks[ks.length-1]]=v};
+
+/* ---------- tabs ---------- */
+const TABS=[['awards','🏆 অর্জন'],['projects','💼 প্রজেক্ট'],['timeline','🧭 পথচলা'],['gallery','🖼️ গ্যালারি'],['texts','✏️ লেখা'],['advanced','⚙️ উন্নত']];
+function drawTabs(){$('tabs').innerHTML=TABS.map(([k,n])=>`<button type="button" role="tab" data-t="${k}" aria-selected="${TAB==k}">${n}</button>`).join('');
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l==L))}
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;TAB=b.dataset.t;drawTabs();draw()};
+document.querySelector('.seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;L=b.dataset.l;drawTabs();draw()};
+
+/* ---------- field builders ---------- */
+const dirA=()=>L=='ar'?' dir="rtl"':'';
+const F={
+  text:(lab,p,o={})=>`<label class="f${o.full?' full':''}"><span>${lab}${o.lang?` <em>${LN[L]}</em>`:''}</span><input class="in" data-p="${p}" value="${esc(getP(S,p))}"${o.lang?dirA():''}${o.ph?` placeholder="${esc(o.ph)}"`:''}>${o.hint?`<small>${o.hint}</small>`:''}</label>`,
+  area:(lab,p,o={})=>`<label class="f${o.full===false?'':' full'}"><span>${lab}${o.lang?` <em>${LN[L]}</em>`:''}</span><textarea class="in" data-p="${p}"${o.lang?dirA():''}>${esc(getP(S,p))}</textarea>${o.hint?`<small>${o.hint}</small>`:''}</label>`,
+  chk:(lab,p)=>`<label class="chk"><input type="checkbox" data-p="${p}" data-k="bool"${getP(S,p)?' checked':''}>${lab}</label>`,
+  sel:(lab,p,opts)=>`<label class="f"><span>${lab}</span><select class="in" data-p="${p}">${opts.map(([v,n])=>`<option value="${esc(v)}"${String(getP(S,p)??'')==v?' selected':''}>${n}</option>`).join('')}</select></label>`,
+  meta:(lab,p)=>{const m=getP(S,p)||[];return `<label class="f full"><span>${lab} <em>${LN[L]}</em></span><textarea class="in" data-p="${p}" data-k="meta"${dirA()}>${esc(m.map(r=>r[0]+': '+r[1]).join('\n'))}</textarea><small>প্রতি লাইনে একটা: <b>নাম: মান</b> (যেমন: প্রতিষ্ঠান: টেন মিনিট স্কুল)</small></label>`},
+  img:(lab,p,o={})=>{const v=getP(S,p)||'';return `<div class="f full"><span>${lab}</span><div class="img"><div class="prev" style="background-image:${v?`url('${esc(v)}')`:'none'}"></div><input class="in" data-p="${p}" value="${esc(v)}" placeholder="ছবির লিংক, অথবা আপলোড করুন"><label class="btn sm">⬆ আপলোড<input type="file" accept="image/*" data-up="${p}" hidden></label></div>${o.hint?`<small>${o.hint}</small>`:''}</div>`}
+};
+const lt=(o,fallback='')=>o?(o[L]||o.bn||o.en||fallback):fallback;
+
+/* ---------- list editors ---------- */
+const AW_CAT=[['course','কোর্স ও সনদ'],['comp','প্রতিযোগিতা'],['sch','বৃত্তি']];
+const ED={
+ awards:{title:'অর্জন',desc:'সনদ, পুরস্কার আর প্রতিযোগিতা। উপরে যেটা, সাইটেও সেটা আগে দেখাবে।',
+  sum:(x)=>[lt({en:x.en&&x.en.t,bn:x.bn&&x.bn.t,ar:x.ar&&x.ar.t},'(নাম নেই)'),(AW_CAT.find(c=>c[0]==x.c)||['',''])[1]+' · '+((x[L]||{}).rank||'')],
+  thumb:x=>x.img,
+  blank:()=>({c:'course',mark:'✓',rib:['#DA6D58','#964734'],doc:1,img:'',cap:{en:'',bn:'',ar:''},en:{rank:'',t:'',m:[]},bn:{rank:'',t:'',m:[]},ar:{rank:'',t:'',m:[]}}),
+  body:(i)=>{const b=`awards.${i}`;return F.sel('ধরন',b+'.c',AW_CAT)+F.text('মেডেলে কী লেখা থাকবে',b+'.mark',{hint:'যেমন 1, 2, 3, ★ বা ✓'})
+   +F.text('ব্যাজ (স্থান/গ্রেড)',`${b}.${L}.rank`,{lang:1,ph:'প্রথম স্থান / কোর্স সম্পন্ন'})+F.text('শিরোনাম',`${b}.${L}.t`,{lang:1})
+   +F.meta('বিস্তারিত',`${b}.${L}.m`)+F.img('ছবি (সার্টিফিকেট বা অনুষ্ঠানের ছবি)',b+'.img',{hint:'ছবি না দিলে একটা সুন্দর সার্টিফিকেট আঁকা দেখাবে।'})
+   +F.text('ছবির বর্ণনা',`${b}.cap.${L}`,{lang:1,full:1})
+   +`<div class="f full" style="display:flex;gap:18px;flex-wrap:wrap">${F.chk('ব্রোঞ্জ রঙের মেডেল (৩য় স্থান)',b+'.bronze')}${F.chk('সার্টিফিকেটের ছবি (পুরোটা দেখাও, কাটবে না)',b+'.doc')}</div>`}},
+ projects:{title:'প্রজেক্ট',desc:'"আমার কাজ" অংশের কার্ডগুলো (Al Bayan AI-এর বড় কার্ডের নিচে)।',
+  sum:x=>[lt(x.t,'(নাম নেই)'),(x.hidden?'🙈 লুকানো · ':'')+(x.link||x.href||'')],
+  thumb:x=>x.img,
+  blank:()=>({cover:'',img:'',href:'https://',tag:'Website',link:'',live:true,t:{en:'',bn:'',ar:''},d:{en:'',bn:'',ar:''}}),
+  body:i=>{const b=`projects.${i}`;return F.text('নাম',`${b}.t.${L}`,{lang:1})+F.text('ছোট ট্যাগ',b+'.tag',{ph:'Website · AI'})
+   +F.area('বর্ণনা',`${b}.d.${L}`,{lang:1})+F.text('লিংক (URL)',b+'.href',{ph:'https://…'})+F.text('লিংকের লেখা',b+'.link',{ph:'example.vercel.app'})
+   +F.img('কভার ছবি',b+'.img',{hint:'ছবি দিলে সেটাই দেখাবে। না দিলে নিচের আঁকা কভার।'})
+   +F.sel('আঁকা কভার (ছবি না থাকলে)',b+'.cover',[['','কিছু না'],...Object.keys(D.covers).map(k=>[k,k])])
+   +`<div class="f" style="display:flex;gap:18px;flex-wrap:wrap;align-content:end">${F.chk('"Live" ট্যাগ',b+'.live')}${F.chk('সাইটে লুকাও',b+'.hidden')}</div>`}},
+ timeline:{title:'পথচলা',desc:'টাইমলাইনের ধাপগুলো। নতুনটা উপরে রাখো।',
+  sum:x=>[(x[L]||[])[1]||'(শিরোনাম নেই)',(x[L]||[])[0]||''],
+  blank:()=>({g:1,en:['','',''],bn:['','',''],ar:['','','']}),
+  body:i=>{const b=`timeline.${i}`;return F.text('সময়',`${b}.${L}.0`,{lang:1,ph:'নভেম্বর ২০২৬'})+F.text('শিরোনাম',`${b}.${L}.1`,{lang:1})+F.area('লেখা',`${b}.${L}.2`,{lang:1})+`<div class="f full">${F.chk('কমলা রঙের বিন্দু (অর্জন)',b+'.g')}</div>`}},
+ gallery:{title:'গ্যালারি',desc:'বড় করে দেখানো ছবিগুলো। প্রথম ছবিটা সবচেয়ে বড় দেখায়।',
+  sum:x=>[lt(x.t,'(নাম নেই)'),lt(x.k)],thumb:x=>x.img,
+  blank:()=>({img:'',k:{en:'Photo',bn:'ছবি',ar:'صورة'},t:{en:'',bn:'',ar:''},d:{en:'',bn:'',ar:''}}),
+  body:i=>{const b=`gallery.${i}`;return F.img('ছবি',b+'.img')+F.text('ছোট লেবেল',`${b}.k.${L}`,{lang:1,ph:'সনদ / পুরস্কার'})+F.text('শিরোনাম',`${b}.t.${L}`,{lang:1})+F.text('বর্ণনা',`${b}.d.${L}`,{lang:1,full:1})}}
+};
+let openSet=new Set();
+function drawList(k){const E=ED[k],arr=S[k];
+  return `<div class="intro"><div><h2>${E.title}</h2><p>${E.desc}</p></div><button class="btn sm" type="button" data-reset="${k}">↺ আসল অবস্থায় ফেরাও</button></div>
+  <div class="help">ভাষা বদলাতে উপরের <b>বাংলা / EN / عربي</b> চাপো। প্রতিটা লেখা তিন ভাষায় আলাদা। কাজ শেষে <b>💾 সেভ করুন</b> চাপতে ভুলো না।</div>
+  <div class="list">${arr.map((x,i)=>{const [t,s]=E.sum(x),th=E.thumb?E.thumb(x):'';return `<details class="item" data-i="${i}"${openSet.has(k+i)?' open':''}><summary>${E.thumb?`<span class="thumb" style="background-image:${th?`url('${esc(th)}')`:'none'}"></span>`:''}<span class="sum"><b>${esc(t)}</b><span>${esc(s)}</span></span><span class="ctl"><button type="button" data-mv="-1" title="উপরে">↑</button><button type="button" data-mv="1" title="নিচে">↓</button><button type="button" data-del title="মুছে ফেলো">🗑</button></span></summary><div class="body">${E.body(i)}</div></details>`}).join('')}</div>
+  <div class="addrow"><button class="btn" type="button" data-add="top">＋ উপরে নতুন যোগ করো</button><button class="btn" type="button" data-add="end">＋ শেষে নতুন যোগ করো</button></div>`}
+
+const KL={badge:'হিরোর উপরের ছোট ব্যাজ',n1:'নাম (প্রথম লাইন)',n2:'নাম (দ্বিতীয় লাইন, রঙিন)',role:'হিরোর পরিচিতি লেখা',tyPre:'টাইপিং লেখার শুরু',b1:'বোতাম: কাজ দেখুন',b2:'বোতাম: যোগাযোগ',b3:'বোতাম: Al Bayan AI',ch1:'হিরো চিপ ১',ch2:'হিরো চিপ ২',ch3:'হিরো চিপ ৩',
+nAbout:'মেনু: আমার কথা',nStory:'মেনু: জীবনী',nSkills:'মেনু: দক্ষতা',nServ:'মেনু: সেবা',nWork:'মেনু: কাজ',nAwards:'মেনু: অর্জন',nGal:'মেনু: গ্যালারি',nJourney:'মেনু: পথচলা',nContact:'মেনু: যোগাযোগ',
+stT:'জীবনী: শিরোনাম',stQ:'জীবনী: উক্তি',st1:'জীবনী: অনুচ্ছেদ ১',st2:'জীবনী: অনুচ্ছেদ ২',st3:'জীবনী: অনুচ্ছেদ ৩',st4:'জীবনী: অনুচ্ছেদ ৪',gT:'আমার লক্ষ্য: শিরোনাম',gD:'আমার লক্ষ্য: লেখা',
+pD:'Al Bayan AI কার্ডের বর্ণনা',awT:'অর্জন: শিরোনাম',awK:'অর্জন: নিচের লেখা',gaT:'গ্যালারি: শিরোনাম',gaK:'গ্যালারি: নিচের লেখা',svT:'সেবা: শিরোনাম',svK:'সেবা: নিচের লেখা',fAb:'ফুটারের পরিচিতি',chHi:'চ্যাটের প্রথম শুভেচ্ছা',pName:'কার্ডে নাম',pPlace:'কার্ডে ঠিকানা'};
+function drawTexts(){const def=D.T[L],ov=S.texts[L];const keys=Object.keys(def).filter(k=>typeof def[k]=='string').sort((a,b)=>(KL[a]?0:1)-(KL[b]?0:1));
+  return `<div class="intro"><div><h2>সাইটের লেখা</h2><p>হেডিং, জীবনী, বোতাম, মেনু সব লেখা এখানে। বদলানো লেখার পাশে ● চিহ্ন থাকবে।</p></div><button class="btn sm" type="button" data-reset="texts">↺ এই ভাষার সব লেখা আগের মতো</button></div>
+  <input class="in" id="q" placeholder="🔍 খোঁজো (যেমন: জীবনী, Al Bayan, যোগাযোগ)" style="margin-bottom:14px"${dirA()}>
+  <div class="tx" id="tx">${keys.map(k=>{const v=k in ov?ov[k]:def[k];const long=def[k].length>70;return `<div class="trow" data-key="${k}" data-s="${esc((k+' '+(KL[k]||'')+' '+def[k]+' '+v).toLowerCase())}"><div class="k"><span>${KL[k]?`<b style="color:var(--ink);font-family:inherit">${KL[k]}</b> · `:''}${k}</span>${k in ov?'<i>● বদলানো</i>':''}</div>${long?`<textarea class="in" data-t="${k}"${dirA()}>${esc(v)}</textarea>`:`<input class="in" data-t="${k}" value="${esc(v)}"${dirA()}>`}${k in ov?`<div class="def">আসল: ${esc(def[k])}</div>`:''}</div>`}).join('')}</div>`}
+
+function drawAdv(){return `<div class="intro"><div><h2>উন্নত (JSON)</h2><p>পুরো কনটেন্ট এক জায়গায়। দক্ষতার তালিকা, সেবা, পরিসংখ্যানের মতো তালিকা-ধরনের লেখা এখানে <b>texts</b>-এর ভেতরে যোগ করে বদলানো যায়। সাবধানে বদলাও।</p></div></div>
+  <textarea class="in" id="adv" style="min-height:60vh;font:13px/1.5 ui-monospace,monospace" spellcheck="false">${esc(JSON.stringify(S,null,2))}</textarea>
+  <div class="addrow"><button class="btn pri" type="button" id="advApply">✔ প্রয়োগ করো</button><span class="err" id="advErr"></span></div>`}
+
+function draw(){const m=$('main');
+  m.innerHTML=TAB=='texts'?drawTexts():TAB=='advanced'?drawAdv():drawList(TAB);
+  if(TAB=='texts')$('q').oninput=e=>{const q=e.target.value.trim().toLowerCase();document.querySelectorAll('.trow').forEach(r=>r.hidden=q&&!r.dataset.s.includes(q))};
+  if(TAB=='advanced')$('advApply').onclick=()=>{try{const o=JSON.parse($('adv').value);if(!o||typeof o!='object')throw 0;
+    for(const k of LISTS)if(!Array.isArray(o[k]))throw new Error(k+' তালিকা নেই');
+    o.texts=o.texts||{};for(const l of ['en','bn','ar'])o.texts[l]=o.texts[l]||{};S=o;markDirty();toast('প্রয়োগ হয়েছে। এখন সেভ করো।')}catch(e){$('advErr').textContent='JSON ঠিক নেই: '+(e.message||e)}};
+}
+
+/* ---------- events ---------- */
+const main=$('main');
+main.addEventListener('input',e=>{const el=e.target;
+  if(el.dataset.t){const k=el.dataset.t,def=D.T[L][k];if(el.value===def)delete S.texts[L][k];else S.texts[L][k]=el.value;markDirty();return}
+  const p=el.dataset.p;if(!p)return;
+  let v=el.value;if(el.dataset.k=='bool')v=el.checked?1:0;
+  if(el.dataset.k=='meta')v=el.value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const i=l.search(/[:：]/);return i<0?[l,'']:[l.slice(0,i).trim(),l.slice(i+1).trim()]});
+  setP(S,p,v);markDirty();
+  if(/\.img$/.test(p)){const pv=el.parentNode.querySelector('.prev');if(pv)pv.style.backgroundImage=v?`url('${v}')`:'none'}
+  const d=el.closest('details.item');if(d){const k=TAB,x=S[k][+d.dataset.i],[t,s]=ED[k].sum(x);d.querySelector('.sum b').textContent=t;d.querySelector('.sum span').textContent=s;
+    const th=d.querySelector('.thumb');if(th&&ED[k].thumb){const u=ED[k].thumb(x);th.style.backgroundImage=u?`url('${u}')`:'none'}}
+});
+main.addEventListener('change',e=>{const el=e.target;if(el.dataset.up)upload(el)});
+main.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details.item')){const key=TAB+d.dataset.i;d.open?openSet.add(key):openSet.delete(key)}},true);
+main.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  const d=b.closest('details.item');
+  if(b.dataset.mv&&d){e.preventDefault();const i=+d.dataset.i,j=i+ +b.dataset.mv,a=S[TAB];if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];openSet.clear();markDirty();draw();return}
+  if(b.hasAttribute('data-del')&&d){e.preventDefault();if(!confirm('এটা মুছে ফেলবে?'))return;S[TAB].splice(+d.dataset.i,1);openSet.clear();markDirty();draw();return}
+  if(b.dataset.add){const a=S[TAB],x=ED[TAB].blank();openSet.clear();if(b.dataset.add=='top'){a.unshift(x);openSet.add(TAB+0)}else{a.push(x);openSet.add(TAB+(a.length-1))}markDirty();draw();
+    const el=document.querySelector(`details.item[data-i="${b.dataset.add=='top'?0:a.length-1}"]`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});return}
+  if(b.dataset.reset){const k=b.dataset.reset;if(!confirm('এই অংশের সব পরিবর্তন মুছে আসল অবস্থায় ফিরবে। নিশ্চিত?'))return;
+    if(k=='texts')S.texts[L]={};else S[k]=clone(D[k]);openSet.clear();markDirty();draw();toast('আসল অবস্থায় ফিরেছে। সেভ করলে সাইটেও ফিরবে।')}
+});
+
+/* ---------- image upload (resized in the browser) ---------- */
+const shrink=file=>new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const M=1800,sc=Math.min(1,M/Math.max(img.width,img.height));
+  const c=document.createElement('canvas');c.width=Math.round(img.width*sc);c.height=Math.round(img.height*sc);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
+  URL.revokeObjectURL(img.src);res(c.toDataURL('image/jpeg',.86).split(',')[1])};img.onerror=()=>rej(new Error('ছবি খোলা যায়নি'));img.src=URL.createObjectURL(file)});
+async function upload(inp){const f=inp.files&&inp.files[0];if(!f)return;const p=inp.dataset.up;const lab=inp.parentNode;lab.firstChild.textContent='⏳ আপলোড হচ্ছে…';
+  try{const data=await shrink(f);const j=await call({action:'upload',name:f.name,type:'image/jpeg',data});setP(S,p,j.url);markDirty();
+    const t=document.querySelector(`[data-p="${p}"]`);if(t){t.value=j.url;t.dispatchEvent(new Event('input',{bubbles:true}))}toast('ছবি আপলোড হয়েছে ✅ এখন সেভ করো।')}
+  catch(e){if(e.message!='auth')toast('আপলোড হয়নি: '+e.message,6000)}finally{lab.firstChild.textContent='⬆ আপলোড';inp.value=''}}
+
+/* ---------- save ---------- */
+$('save').onclick=async()=>{const b=$('save');b.disabled=true;setSt('সেভ হচ্ছে…');
+  const out={texts:{}};for(const l of ['en','bn','ar'])if(Object.keys(S.texts[l]||{}).length)out.texts[l]=S.texts[l];
+  for(const k of LISTS)if(JSON.stringify(S[k])!==JSON.stringify(D[k]))out[k]=S[k];
+  try{const j=await call({action:'save',content:out});dirty=false;setSt('✅ সেভ হয়েছে · '+new Date(j.savedAt).toLocaleTimeString('bn-BD')+' · ১ মিনিটের মধ্যে সাইটে দেখা যাবে','ok');toast('সেভ হয়েছে ✅ ১ মিনিটের মধ্যে সাইটে দেখা যাবে।',5000)}
+  catch(e){if(e.message!='auth'){setSt('❌ সেভ হয়নি: '+e.message,'bad');toast('সেভ হয়নি: '+e.message,6000)}}finally{b.disabled=false}};
+})();
+</script>
+</body>
+</html>
