@@ -12,6 +12,7 @@
 <style>
 :root{--bg:#041215;--bg2:#071b1f;--card:#0a2125;--ink:#eaf4f3;--soft:#9db6b8;--line:rgba(175,221,229,.12);--line2:rgba(175,221,229,.24);--apri:#FEAF76;--coral:#DA6D58;--sea:#0FA4AF;--ok:#3ddc97;--bad:#ff7a6b}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 Outfit,"Hind Siliguri",Cairo,system-ui,sans-serif}
 button,input,select,textarea{font:inherit;color:inherit}
 a{color:var(--apri)}
@@ -82,6 +83,13 @@ details.item>summary::-webkit-details-marker{display:none}
 .toast.on{display:block}
 .help{background:linear-gradient(140deg,rgba(254,175,118,.12),transparent 60%),var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft);margin-bottom:16px}
 .help b{color:var(--ink)}
+.msg{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:grid;gap:10px}
+.msg .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.msg .top b{font-size:17px}.msg .top time{font-size:13px;color:var(--soft)}
+.msg .tags{display:flex;gap:6px;flex-wrap:wrap}.msg .tags span{font-size:12.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--soft)}
+.msg p{margin:0;white-space:pre-wrap;line-height:1.6}
+.msg .acts{display:flex;gap:8px;flex-wrap:wrap}
+.empty{padding:40px;text-align:center;color:var(--soft);border:1.5px dashed var(--line2);border-radius:20px}
 @media(max-width:700px){.body{grid-template-columns:minmax(0,1fr)}.brand small{display:none}.hbar .btn span{display:none}}
 </style>
 </head>
@@ -153,7 +161,7 @@ const getP=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
 const setP=(o,p,v)=>{const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];if(a[k]==null||typeof a[k]!='object')a[k]=/^\d+$/.test(ks[i+1])?[]:{};a=a[k]}a[ks[ks.length-1]]=v};
 
 /* ---------- tabs ---------- */
-const TABS=[['awards','🏆 অর্জন'],['projects','💼 প্রজেক্ট'],['timeline','🧭 পথচলা'],['gallery','🖼️ গ্যালারি'],['texts','✏️ লেখা'],['advanced','⚙️ উন্নত']];
+const TABS=[['awards','🏆 অর্জন'],['projects','💼 প্রজেক্ট'],['timeline','🧭 পথচলা'],['gallery','🖼️ গ্যালারি'],['texts','✏️ লেখা'],['inbox','📩 প্রস্তাব'],['advanced','⚙️ উন্নত']];
 function drawTabs(){$('tabs').innerHTML=TABS.map(([k,n])=>`<button type="button" role="tab" data-t="${k}" aria-selected="${TAB==k}">${n}</button>`).join('');
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l==L))}
 $('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;TAB=b.dataset.t;drawTabs();draw()};
@@ -221,7 +229,21 @@ function drawAdv(){return `<div class="intro"><div><h2>উন্নত (JSON)</h
   <textarea class="in" id="adv" style="min-height:60vh;font:13px/1.5 ui-monospace,monospace" spellcheck="false">${esc(JSON.stringify(S,null,2))}</textarea>
   <div class="addrow"><button class="btn pri" type="button" id="advApply">✔ প্রয়োগ করো</button><span class="err" id="advErr"></span></div>`}
 
+
+let INBOX=null;
+async function loadInbox(){const m=$('main');m.innerHTML='<div class="intro"><div><h2>প্রস্তাবের অনুরোধ</h2><p>লোড হচ্ছে…</p></div></div>';
+  try{const j=await call({action:'inbox'});INBOX=j.items||[];if(TAB=='inbox')m.innerHTML=drawInbox()}catch(e){if(e.message!='auth')m.innerHTML='<div class="empty">লোড করা যায়নি: '+esc(e.message)+'</div>'}}
+function drawInbox(){const it=INBOX||[];
+  return `<div class="intro"><div><h2>প্রস্তাবের অনুরোধ (${it.length})</h2><p>সাইটের "প্রস্তাব নিন" ফর্ম থেকে আসা অনুরোধ। ইমেইলে উত্তর দিতে <b>✉ উত্তর দাও</b> চাপো।</p></div><button class="btn sm" type="button" id="inR">↻ রিফ্রেশ</button></div>
+  <div class="help">⚠️ বাবা-মাকে সাথে রেখে উত্তর দিও। কেউ টাকা আগে চাইলে, ব্যক্তিগত তথ্য চাইলে বা দেখা করতে বললে সাবধান থেকো।</div>
+  <div class="list">${it.length?it.map(x=>{const wa=String(x.phone||'').replace(/[^\d]/g,'');const sub=encodeURIComponent('Re: your project request'+(x.type?' ('+x.type+')':''));
+    return `<div class="msg"><div class="top"><b>${esc(x.name)}</b><time>${esc(new Date(x.at).toLocaleString('bn-BD'))}</time></div>
+    <div class="tags">${[x.type,x.budget,x.time,x.lang&&('ভাষা: '+x.lang)].filter(Boolean).map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+    <p>${esc(x.msg)}</p>
+    <div class="tags"><span>✉ ${esc(x.email)}</span>${x.phone?`<span>📞 ${esc(x.phone)}</span>`:''}</div>
+    <div class="acts"><a class="btn sm" href="mailto:${esc(x.email)}?subject=${sub}">✉ উত্তর দাও</a>${wa.length>=8?`<a class="btn sm" href="https://wa.me/${wa}" target="_blank" rel="noopener">💬 হোয়াটসঅ্যাপ</a>`:''}<button class="btn sm dan" type="button" data-pdel="${esc(x.ref)}">🗑 মুছে ফেলো</button></div></div>`}).join(''):'<div class="empty">এখনো কোনো অনুরোধ আসেনি। কেউ সাইটের ফর্ম পূরণ করলে এখানে দেখা যাবে।</div>'}</div>`}
 function draw(){const m=$('main');
+  if(TAB=='inbox'){loadInbox();return}
   m.innerHTML=TAB=='texts'?drawTexts():TAB=='advanced'?drawAdv():drawList(TAB);
   if(TAB=='texts')$('q').oninput=e=>{const q=e.target.value.trim().toLowerCase();document.querySelectorAll('.trow').forEach(r=>r.hidden=q&&!r.dataset.s.includes(q))};
   if(TAB=='advanced')$('advApply').onclick=()=>{try{const o=JSON.parse($('adv').value);if(!o||typeof o!='object')throw 0;
@@ -243,7 +265,9 @@ main.addEventListener('input',e=>{const el=e.target;
 });
 main.addEventListener('change',e=>{const el=e.target;if(el.dataset.up)upload(el)});
 main.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details.item')){const key=TAB+d.dataset.i;d.open?openSet.add(key):openSet.delete(key)}},true);
-main.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+main.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.id=='inR'){loadInbox();return}
+  if(b.dataset.pdel){if(!confirm('এই অনুরোধটা মুছে ফেলবে?'))return;b.disabled=true;try{await call({action:'delete-proposal',ref:b.dataset.pdel});INBOX=INBOX.filter(x=>x.ref!==b.dataset.pdel);$('main').innerHTML=drawInbox();toast('মুছে ফেলা হয়েছে')}catch(err){if(err.message!='auth')toast('মোছা যায়নি: '+err.message);b.disabled=false}return}
   const d=b.closest('details.item');
   if(b.dataset.mv&&d){e.preventDefault();const i=+d.dataset.i,j=i+ +b.dataset.mv,a=S[TAB];if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];openSet.clear();markDirty();draw();return}
   if(b.hasAttribute('data-del')&&d){e.preventDefault();if(!confirm('এটা মুছে ফেলবে?'))return;S[TAB].splice(+d.dataset.i,1);openSet.clear();markDirty();draw();return}

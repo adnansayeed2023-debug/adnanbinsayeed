@@ -527,6 +527,32 @@ html[dir=rtl] .csend svg{transform:scaleX(-1)}
 .awmore svg{width:46px;height:46px;color:var(--acc)}
 .awmore b{color:var(--ink);font-size:18px}
 
+
+/* proposal form */
+.prop{margin-top:40px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:0;border-radius:32px;overflow:hidden;border:1px solid var(--line2);background:var(--card);box-shadow:var(--shadow)}
+.prop .pl{padding:clamp(28px,4vw,44px);background:radial-gradient(circle at 0 0,rgba(254,175,118,.22),transparent 55%),linear-gradient(160deg,rgba(15,164,175,.16),transparent 70%);border-inline-end:1px solid var(--line);display:flex;flex-direction:column}
+.prop .pk{align-self:flex-start;padding:6px 12px;border-radius:999px;border:1px solid var(--line2);font-size:12.5px;font-weight:700;color:var(--acc)}
+.prop h3{font-size:clamp(26px,3vw,36px);line-height:1.15;margin:16px 0 12px;letter-spacing:-.01em}
+.prop .pl>p{color:var(--soft);margin:0 0 22px}
+.psteps{list-style:none;padding:0;margin:auto 0 0;display:grid;gap:10px;counter-reset:ps}
+.psteps li{counter-increment:ps;display:flex;align-items:center;gap:12px;font-weight:600}
+.psteps li::before{content:counter(ps);width:32px;height:32px;flex:none;border-radius:50%;display:grid;place-items:center;font:700 14px var(--fm);background:linear-gradient(120deg,var(--apri),var(--coral));color:#1b0c07}
+.pf{padding:clamp(24px,3.5vw,40px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+.pf label{display:grid;gap:6px;font-size:13.5px;font-weight:600;color:var(--soft)}
+.pf .w{grid-column:1/-1}
+.pf input,.pf select,.pf textarea{width:100%;min-height:48px;padding:11px 14px;border-radius:14px;border:1px solid var(--line2);background:var(--bg2);color:var(--ink);font:inherit;font-size:15px;outline:none;transition:border-color .2s}
+.pf textarea{min-height:120px;resize:vertical;line-height:1.5}
+.pf input:focus,.pf select:focus,.pf textarea:focus{border-color:var(--apri);box-shadow:0 0 0 3px rgba(254,175,118,.15)}
+.pf .bad{border-color:#ff7a6b!important}
+.pf{position:relative}
+.pf .hp{position:absolute;top:0;inset-inline-start:0;width:1px;height:1px;min-height:0;padding:0;border:0;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
+.pfb{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pfb .btn:disabled{opacity:.6;cursor:wait}
+.pfm{margin:0;font-size:14.5px;flex:1;min-width:200px}
+.pfm.ok{color:#3ddc97}.pfm.err{color:#ff7a6b}
+.prop.done .pf{opacity:.9}
+@media(max-width:900px){.prop{grid-template-columns:minmax(0,1fr)}.prop .pl{border-inline-end:0;border-bottom:1px solid var(--line)}.psteps{margin-top:6px}}
+@media(max-width:560px){.pf{grid-template-columns:minmax(0,1fr)}}
 /* responsive */
 @media(max-width:1000px){
   .hgrid{grid-template-columns:minmax(0,1fr);text-align:start;padding-top:10px}
@@ -775,6 +801,25 @@ html.paused .live::before{animation-play-state:paused!important}
     <p class="kicker" data-k="svK"></p>
   </div>
   <div class="serv" id="servGrid"></div>
+  <div class="prop" id="proposal">
+    <div class="pl">
+      <span class="pk" data-k="prK"></span>
+      <h3 data-k="prT"></h3>
+      <p data-k="prD"></p>
+      <ol class="psteps" id="prSteps"></ol>
+    </div>
+    <form class="pf" id="pf" novalidate>
+      <label><span data-k="fName"></span><input name="name" autocomplete="name" required maxlength="80"></label>
+      <label><span data-k="fEmail"></span><input name="email" type="email" autocomplete="email" required maxlength="120" dir="ltr"></label>
+      <label><span data-k="fPhone"></span><input name="phone" type="tel" autocomplete="tel" maxlength="30" dir="ltr"></label>
+      <label><span data-k="fType"></span><select name="type" id="pfType"></select></label>
+      <label><span data-k="fBudget"></span><select name="budget" id="pfBud"></select></label>
+      <label><span data-k="fTime"></span><select name="time" id="pfTime"></select></label>
+      <label class="w"><span data-k="fMsg"></span><textarea name="msg" id="pfMsgIn" rows="4" required maxlength="3000"></textarea></label>
+      <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="w pfb"><button class="btn main" type="submit" id="pfBtn"><span data-k="fSend"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/></svg></button><p class="pfm" id="pfMsg" role="status" aria-live="polite"></p></div>
+    </form>
+  </div>
 </div></section>
 
 <section id="work"><div class="wrap">
@@ -947,6 +992,12 @@ html.paused .live::before{animation-play-state:paused!important}
     if(c.texts)for(const l of ['en','bn','ar'])if(c.texts[l])Object.assign(T[l],c.texts[l]);
     const sw=(a,b)=>{if(Array.isArray(b)){a.splice(0,a.length,...b)}};
     sw(awards,c.awards);sw(tl,c.timeline);sw(GAL,c.gallery);sw(PROJ,c.projects);};
+
+  const pfOpen=Date.now();
+  const renderProp=()=>{const t=T[lang];if(!$('pf'))return;
+    $('prSteps').innerHTML=(t.prS||[]).map(x=>`<li>${esc(x)}</li>`).join('');
+    const fill=(id,arr)=>{const el=$(id),v=el.selectedIndex;el.innerHTML=(arr||[]).map((x,i)=>`<option value="${i}">${esc(x)}</option>`).join('');if(v>0)el.selectedIndex=v};
+    fill('pfType',t.prTypes);fill('pfBud',t.prBud);fill('pfTime',t.prTimes);$('pfMsgIn').placeholder=t.fMsgPh||''};
   let lang="bn";
   const bnNum=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
   const $=id=>document.getElementById(id);
@@ -982,7 +1033,7 @@ html.paused .live::before{animation-play-state:paused!important}
     const nf=n=>lang=="bn"?bnNum(n):lang=="ar"?String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]):n;
     $('servGrid').innerHTML=t.serv.map(([h,d],i)=>`<div class="card"><span class="num">${nf('0'+(i+1))}</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#024950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${sic[i]}</svg></div><h3>${h}</h3><p>${d}</p></div>`).join('');
     $('feats').innerHTML=t.feats.map(x=>`<li>${x}</li>`).join('');
-    renderAwards();renderLangs();renderCust();renderProj();
+    renderAwards();renderLangs();renderCust();renderProj();renderProp();
     $('tl').innerHTML=tl.map(o=>{const [y,h,d]=o[lang];return `<li${o.g?' class="g"':''}><span class="yr">${y}</span><div><h3>${h}</h3><p>${d}</p></div></li>`}).join('');
     ['En','Bn','Ar'].forEach(k=>$('b'+k).setAttribute('aria-pressed',lang==k.toLowerCase()));
     $('note').textContent='';
@@ -1101,6 +1152,18 @@ html.paused .live::before{animation-play-state:paused!important}
   const lbOpen=(list,i)=>{LBL=list;lbShow(i)};
   const lbHide=()=>$('lb').classList.remove('on');
   window.__gal=renderGal;renderGal();
+  $('pf').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,t=T[lang],m=$('pfMsg'),b=$('pfBtn');
+    const val=n=>f.elements[n].value.trim();const en=SD.T.en;
+    const bad=[];if(val('name').length<2)bad.push('name');if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('email')))bad.push('email');if(val('msg').length<10)bad.push('msg');
+    ['name','email','msg'].forEach(n=>f.elements[n].classList.toggle('bad',bad.includes(n)));
+    if(bad.length){m.className='pfm err';m.textContent=t.fNeed;f.elements[bad[0]].focus();return}
+    const pick=(n,arr)=>{const i=+f.elements[n].value;return (en[arr]||[])[i]||''};
+    b.disabled=true;b.querySelector('span').textContent=t.fSending;m.className='pfm';m.textContent='';
+    try{const r=await fetch(API+'/api/proposal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:val('name'),email:val('email'),phone:val('phone'),type:pick('type','prTypes'),budget:pick('budget','prBud'),time:pick('time','prTimes'),msg:val('msg'),website:val('website'),t:pfOpen,lang})});
+      if(!r.ok)throw new Error(r.status);f.reset();renderProp();m.className='pfm ok';m.textContent=t.fOk;$('proposal').classList.add('done')}
+    catch(err){m.className='pfm err';m.textContent=t.fErr}
+    finally{b.disabled=false;b.querySelector('span').textContent=t.fSend}});
+
   $('awF').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;awFilter=b.dataset.c;renderAwards()});
   $('awGrid').addEventListener('click',e=>{const b=e.target.closest('.ath[data-p]');if(!b)return;const ph=awards.filter(a=>a.img).map(a=>({img:a.img,t:a[lang].t,d:a.cap[lang]}));lbOpen(ph,+b.dataset.p)});
 

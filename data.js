@@ -207,7 +207,51 @@ window.SITE_DEFAULTS={
    "ayT": "“My Lord, increase me in knowledge.”",
    "ayR": "Surah Ta-Ha 20:114",
    "share": "Share my website",
-   "shared": "Link copied!"
+   "shared": "Link copied!",
+   "prK": "Free · No obligation",
+   "prT": "Get a customized proposal for your project",
+   "prD": "Tell me what you want to build. I'll reply by email with a plan, a timeline and a price made for your project.",
+   "prS": [
+    "Share your idea",
+    "Get a plan & price",
+    "We start building"
+   ],
+   "fName": "Your name",
+   "fEmail": "Email",
+   "fPhone": "WhatsApp (optional)",
+   "fType": "What do you need?",
+   "fBudget": "Budget",
+   "fTime": "When do you need it?",
+   "fMsg": "About your project",
+   "fMsgPh": "What is it for, what should it have, any examples you like…",
+   "fSend": "Send request",
+   "fSending": "Sending…",
+   "fOk": "Thank you! Your request has been sent. I'll reply to your email soon, in shaa Allah.",
+   "fErr": "Couldn't send. Please try again, or email me directly.",
+   "fNeed": "Please fill in your name, a valid email and a few words about the project.",
+   "prTypes": [
+    "Website",
+    "Landing page",
+    "Portfolio website",
+    "Online shop",
+    "AI chatbot or AI tool",
+    "Logo & branding",
+    "Poster or social media design",
+    "Something else"
+   ],
+   "prBud": [
+    "Not sure yet",
+    "Under ৳3,000 (~$25)",
+    "৳3,000 – 10,000",
+    "৳10,000 – 30,000",
+    "৳30,000+"
+   ],
+   "prTimes": [
+    "As soon as possible",
+    "Within 2 weeks",
+    "Within a month",
+    "Flexible"
+   ]
   },
   "bn": {
    "ch1": "আরবি কোর্সে ১ম",
@@ -415,7 +459,51 @@ window.SITE_DEFAULTS={
    "ayT": "“হে আমার রব, আমার জ্ঞান বাড়িয়ে দিন।”",
    "ayR": "সূরা ত্ব-হা ২০:১১৪",
    "share": "আমার ওয়েবসাইট শেয়ার করুন",
-   "shared": "লিংক কপি হয়েছে!"
+   "shared": "লিংক কপি হয়েছে!",
+   "prK": "ফ্রি · কোনো বাধ্যবাধকতা নেই",
+   "prT": "আপনার প্রজেক্টের জন্য নিজস্ব প্রস্তাব নিন",
+   "prD": "কী বানাতে চান লিখে জানান। আমি ইমেইলে আপনার প্রজেক্টের জন্য পরিকল্পনা, সময় আর দাম জানিয়ে উত্তর দেব।",
+   "prS": [
+    "আইডিয়া জানান",
+    "পরিকল্পনা ও দাম পান",
+    "কাজ শুরু"
+   ],
+   "fName": "আপনার নাম",
+   "fEmail": "ইমেইল",
+   "fPhone": "হোয়াটসঅ্যাপ (ঐচ্ছিক)",
+   "fType": "কী দরকার?",
+   "fBudget": "বাজেট",
+   "fTime": "কবের মধ্যে লাগবে?",
+   "fMsg": "প্রজেক্ট সম্পর্কে লিখুন",
+   "fMsgPh": "কীসের জন্য, কী কী থাকবে, পছন্দের কোনো উদাহরণ…",
+   "fSend": "প্রস্তাব চান",
+   "fSending": "পাঠানো হচ্ছে…",
+   "fOk": "ধন্যবাদ! আপনার অনুরোধ পৌঁছে গেছে। ইনশাআল্লাহ শিগগিরই ইমেইলে উত্তর দেব।",
+   "fErr": "পাঠানো যায়নি। আবার চেষ্টা করুন, অথবা সরাসরি ইমেইল করুন।",
+   "fNeed": "নাম, সঠিক ইমেইল আর প্রজেক্ট সম্পর্কে কয়েকটা কথা লিখুন।",
+   "prTypes": [
+    "ওয়েবসাইট",
+    "ল্যান্ডিং পেজ",
+    "পোর্টফোলিও ওয়েবসাইট",
+    "অনলাইন শপ",
+    "AI চ্যাটবট বা AI টুল",
+    "লোগো ও ব্র্যান্ডিং",
+    "পোস্টার বা সোশ্যাল মিডিয়া ডিজাইন",
+    "অন্য কিছু"
+   ],
+   "prBud": [
+    "এখনো ঠিক করিনি",
+    "৳৩,০০০-এর কম",
+    "৳৩,০০০ – ১০,০০০",
+    "৳১০,০০০ – ৩০,০০০",
+    "৳৩০,০০০+"
+   ],
+   "prTimes": [
+    "যত তাড়াতাড়ি সম্ভব",
+    "২ সপ্তাহের মধ্যে",
+    "১ মাসের মধ্যে",
+    "সময় নিয়ে সমস্যা নেই"
+   ]
   },
   "ar": {
    "ch1": "الأول · دورة العربية",
@@ -623,7 +711,51 @@ window.SITE_DEFAULTS={
    "ayT": "",
    "ayR": "سورة طه ٢٠:١١٤",
    "share": "شارك موقعي",
-   "shared": "تم نسخ الرابط!"
+   "shared": "تم نسخ الرابط!",
+   "prK": "مجاني · دون أي التزام",
+   "prT": "احصل على عرض مخصّص لمشروعك",
+   "prD": "أخبرني بما تريد أن تبنيه، وسأردّ عليك بالبريد بخطة ومدة وسعر مناسب لمشروعك.",
+   "prS": [
+    "شارك فكرتك",
+    "استلم الخطة والسعر",
+    "نبدأ العمل"
+   ],
+   "fName": "اسمك",
+   "fEmail": "البريد الإلكتروني",
+   "fPhone": "واتساب (اختياري)",
+   "fType": "ماذا تحتاج؟",
+   "fBudget": "الميزانية",
+   "fTime": "متى تحتاجه؟",
+   "fMsg": "عن مشروعك",
+   "fMsgPh": "لأي غرض، وماذا يجب أن يتضمن، وأمثلة تعجبك…",
+   "fSend": "أرسل الطلب",
+   "fSending": "جارٍ الإرسال…",
+   "fOk": "شكرًا لك! وصل طلبك، وسأردّ على بريدك قريبًا إن شاء الله.",
+   "fErr": "تعذّر الإرسال. حاول مرة أخرى أو راسلني بالبريد مباشرة.",
+   "fNeed": "يرجى كتابة الاسم وبريد صحيح وكلمات قليلة عن المشروع.",
+   "prTypes": [
+    "موقع إلكتروني",
+    "صفحة هبوط",
+    "موقع شخصي (بورتفوليو)",
+    "متجر إلكتروني",
+    "روبوت محادثة أو أداة ذكاء اصطناعي",
+    "شعار وهوية",
+    "تصميم ملصق أو منشورات",
+    "شيء آخر"
+   ],
+   "prBud": [
+    "لم أحدّد بعد",
+    "أقل من ٣٠٠٠ تاكا",
+    "٣٠٠٠ – ١٠٠٠٠ تاكا",
+    "١٠٠٠٠ – ٣٠٠٠٠ تاكا",
+    "أكثر من ٣٠٠٠٠ تاكا"
+   ],
+   "prTimes": [
+    "في أقرب وقت",
+    "خلال أسبوعين",
+    "خلال شهر",
+    "الوقت مرن"
+   ]
   }
  },
  "awards": [

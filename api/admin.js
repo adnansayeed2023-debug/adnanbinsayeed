@@ -1,6 +1,6 @@
 // Admin only: check password, save content, upload images.
 import crypto from 'node:crypto';
-import { readContent, writeContent, backupContent, saveImage } from './_store.js';
+import { readContent, writeContent, backupContent, saveImage, listProposals, deleteProposal } from './_store.js';
 
 const sha = s => crypto.createHash('sha256').update(String(s)).digest();
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -44,6 +44,8 @@ export default async function handler(req, res) {
       const url = await saveImage(body.name, type, buf);
       return res.status(200).json({ ok: true, url });
     }
+    if (body.action === 'inbox') return res.status(200).json({ ok: true, items: await listProposals() });
+    if (body.action === 'delete-proposal') { await deleteProposal(body.ref); return res.status(200).json({ ok: true }); }
     return res.status(400).json({ error: 'bad-action' });
   } catch (e) {
     return res.status(500).json({ error: 'server', detail: String(e && e.message || e).slice(0, 200) });
