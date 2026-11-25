@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var ac=localStorage.getItem("abs-accent");if(/^(emerald|royal|rose|ocean|gold)$/.test(ac||""))document.documentElement.dataset.accent=ac}catch(e){}</script>
 <script>try{var t=localStorage.getItem("abs-theme");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <meta name="google-site-verification" content="h8XiQp1boOX9tJlSWwIzLa7VXgnmbygaI2L60jJY01E">
 <meta name="google-site-verification" content="sv7Xpfj4L_FCkenDig7QFcFTjwz894_u1hSGs-wAeWo">
@@ -49,7 +50,7 @@ button,input,textarea{font:inherit;color:inherit}
 a{color:inherit}
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1240px;margin:0 auto;padding-inline:max(5vw,18px)}
-section{padding:clamp(76px,9vw,132px) 0;position:relative}
+section{padding:clamp(60px,7vw,108px) 0;position:relative}
 h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.025em;text-wrap:balance}
 html[lang=bn] :is(h1,h2,h3){letter-spacing:0;line-height:1.3}
 html[lang=ar] :is(h1,h2,h3){letter-spacing:0;line-height:1.35}
@@ -136,6 +137,8 @@ nav.scrolled .bar{box-shadow:var(--shadow);border-color:var(--line2)}
 .hero h1 span{display:block}
 .hero h1 .l2{font-family:var(--fs);font-style:italic;font-weight:500;letter-spacing:-.035em;padding-inline-end:.1em;padding-bottom:.06em;
   background:linear-gradient(100deg,var(--apri),var(--coral) 55%,var(--sea));-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme=light] .hero h1 .l2{background-image:linear-gradient(100deg,var(--coral),var(--acc) 60%,var(--teal))}
+:root[data-theme=light] .lang b{background-image:linear-gradient(120deg,var(--ink),var(--acc))}
 html[lang=bn] .hero h1{font-size:clamp(50px,8vw,118px);line-height:1.12;letter-spacing:0}
 html[lang=bn] .hero h1 .l2{font-family:"Hind Siliguri",sans-serif;font-style:normal;font-weight:700;letter-spacing:0}
 html[lang=ar] .hero h1{font-size:clamp(50px,8vw,112px);line-height:1.25;letter-spacing:0}
@@ -448,6 +451,78 @@ html[dir=rtl] .fab{padding:0 18px 0 24px}
 .csend:disabled{opacity:.5}
 html[dir=rtl] .csend svg{transform:scaleX(-1)}
 
+
+/* accent palettes (customizer) */
+:root[data-accent=emerald]{--apri:#F2C96B;--coral:#45BF95;--sea:#34D399;--acc:#F2C96B}
+:root[data-accent=royal]{--apri:#CDBDFF;--coral:#9B7BFF;--sea:#7AA2FF;--acc:#CDBDFF}
+:root[data-accent=rose]{--apri:#FFB8C6;--coral:#EE6A8C;--sea:#F48FB1;--acc:#FFB8C6}
+:root[data-accent=ocean]{--apri:#93DBFF;--coral:#4FA3F0;--sea:#22D3EE;--acc:#93DBFF}
+:root[data-accent=gold]{--apri:#FFD480;--coral:#E9A23B;--sea:#E8B04B;--acc:#FFD480}
+:root[data-theme=light][data-accent=emerald]{--acc:#1f7a5c}
+:root[data-theme=light][data-accent=royal]{--acc:#5b34d6}
+:root[data-theme=light][data-accent=rose]{--acc:#c2335a}
+:root[data-theme=light][data-accent=ocean]{--acc:#1d64b5}
+:root[data-theme=light][data-accent=gold]{--acc:#9a5f0c}
+.cust{position:fixed;z-index:70;top:86px;inset-inline-end:max(16px,calc((100vw - 1180px)/2));width:min(330px,calc(100vw - 32px));padding:20px;border-radius:24px;background:var(--glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--line2);box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top right;transition:.3s var(--ease)}
+.cust.on{opacity:1;visibility:visible;transform:none}
+.cust h4{margin:0 0 4px;font-size:16px}
+.cust p{margin:0 0 14px;font-size:13.5px;color:var(--soft);line-height:1.45}
+.cust .lbl{font:600 11.5px var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:14px 0 10px}
+.sw{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.sw button{aspect-ratio:1;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;background:conic-gradient(from 210deg,var(--a) 0 50%,var(--b) 0);box-shadow:inset 0 0 0 3px var(--card);transition:transform .2s var(--ease)}
+.sw button:hover{transform:scale(1.08)}
+.sw button[aria-pressed=true]{border-color:var(--ink)}
+.mrow{display:flex;gap:8px}
+.mrow button{flex:1;min-height:40px;border-radius:12px;border:1px solid var(--line2);background:var(--card);color:var(--ink);font-weight:700;font-size:13.5px;cursor:pointer}
+.mrow button[aria-pressed=true]{background:linear-gradient(120deg,var(--apri),var(--coral));color:#1b0c07;border-color:transparent}
+.creset{margin-top:14px;background:none;border:0;color:var(--soft);font-size:13px;cursor:pointer;text-decoration:underline;padding:0}
+
+/* skills v2 */
+.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid.g4 .card{min-height:300px;position:relative;overflow:hidden}
+.grid.g4 .card:nth-child(4){background:linear-gradient(160deg,rgba(15,164,175,.14),transparent 60%),var(--card)}
+.grid.g4 .card::before{content:"";position:absolute;inset:auto -30% -60% auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(var(--apri),transparent 70%);opacity:0;transition:opacity .5s}
+.grid.g4 .card:hover::before{opacity:.14}
+.langs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.lang{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--line);background:var(--card);padding:52px 28px 22px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:170px}
+.lang>div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.lang:hover b{letter-spacing:.01em}
+.lang b{transition:letter-spacing .5s var(--ease)}
+.lang b{font-size:clamp(34px,3.6vw,50px);line-height:1.1;font-weight:800;letter-spacing:-.02em;background:linear-gradient(120deg,var(--ink),var(--apri));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lang .ar{font-family:Amiri,serif;direction:rtl}
+.lang span{font-size:13.5px;color:var(--soft);font-weight:600}
+.lang i{position:absolute;top:18px;inset-inline-start:24px;font:600 11.5px var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-style:normal}
+.lang .dots{display:flex;gap:5px;order:2}
+.lang .dots em{width:22px;height:6px;border-radius:3px;background:var(--line2)}
+.lang .dots em.f{background:linear-gradient(90deg,var(--apri),var(--coral))}
+
+/* awards v2: certificate wall */
+.awtools{display:flex;flex-wrap:wrap;gap:8px;margin:-14px 0 26px}
+.awtools button{min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);background:var(--card);color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.25s var(--ease)}
+.awtools button sup{font:600 11.5px var(--fm);min-width:22px;height:22px;border-radius:11px;display:grid;place-items:center;background:var(--line);top:0}
+.awtools button:hover{border-color:var(--apri)}
+.awtools button[aria-pressed=true]{background:linear-gradient(120deg,var(--apri),var(--coral));color:#1b0c07;border-color:transparent}
+.awtools button[aria-pressed=true] sup{background:rgba(0,0,0,.14)}
+.aw.wall{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.aw.wall .award{display:flex;flex-direction:column;padding:0;overflow:hidden;gap:0;background:var(--card)}
+.aw.wall .award[hidden]{display:none}
+.ath{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:0;background:var(--bg2);cursor:zoom-in;overflow:hidden;color:#fff}
+.ath img,.ath>svg{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
+.award:hover .ath img,.award:hover .ath>svg{transform:scale(1.06)}
+.ath::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,12,14,.35),transparent 35%,transparent 65%,rgba(1,12,14,.55))}
+.ath .md{position:absolute;z-index:2;top:0;inset-inline-end:16px;width:58px;height:72px;filter:drop-shadow(0 10px 12px rgba(0,0,0,.35))}
+.ath .cat{position:absolute;z-index:2;top:14px;inset-inline-start:14px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);font-size:12.5px;font-weight:700}
+.ath .zm{position:absolute;z-index:2;bottom:14px;inset-inline-end:14px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);opacity:0;transform:scale(.8);transition:.35s var(--ease)}
+.award:hover .zm,.ath:focus-visible .zm{opacity:1;transform:none}
+.ab{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1}
+.ab .rank{align-self:flex-start;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);font-size:12px}
+.aw.wall .award h3{font-size:20px;margin:12px 0 12px}
+.aw.wall .meta{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line2);font-size:14px}
+.aw.wall .award:not(.pic){background:var(--card)}
+.awmore{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;border:1.5px dashed var(--line2)!important;background:transparent!important;padding:30px!important;color:var(--soft);min-height:260px}
+.awmore svg{width:46px;height:46px;color:var(--acc)}
+.awmore b{color:var(--ink);font-size:18px}
+
 /* responsive */
 @media(max-width:1000px){
   .hgrid{grid-template-columns:minmax(0,1fr);text-align:start;padding-top:10px}
@@ -466,6 +541,9 @@ html[dir=rtl] .csend svg{transform:scaleX(-1)}
   .serv .card p{grid-column:2}
   .serv .ico{display:none}
   .aw{grid-template-columns:minmax(0,1fr)}
+  .aw.wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .langs{grid-template-columns:minmax(0,1fr)}
 }
 @media(max-width:640px){
   body{font-size:16px}
@@ -507,6 +585,7 @@ html[dir=rtl] .csend svg{transform:scaleX(-1)}
   .chat{inset:8px;width:auto;height:auto;border-radius:22px}
   .totop{bottom:90px;inset-inline-start:auto;inset-inline-end:22px;width:46px;height:46px}
 }
+@media(max-width:640px){.aw.wall,.grid.g4{grid-template-columns:minmax(0,1fr)}.grid.g4 .card{min-height:0}.lang{min-height:120px}.cust{top:72px}}
 @media(max-width:380px){.seg button{padding:0 7px}}
 
 /* motion controls */
@@ -560,12 +639,15 @@ html.paused .live::before{animation-play-state:paused!important}
   <div class="tools">
     <div class="seg" role="group" aria-label="Language"><button type="button" id="bBn" aria-pressed="true">বাংলা</button><button type="button" id="bEn" aria-pressed="false">EN</button><button type="button" id="bAr" aria-pressed="false">عربي</button></div>
     <button class="ibtn pbtn" id="pause" type="button" aria-label="Pause animations" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><g class="pa"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></g><path class="pl" d="M8 5v14l11-7z"/></svg></button>
+    <button class="ibtn" id="custBtn" type="button" aria-label="Customize colors" aria-expanded="false" aria-controls="cust"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10.5" cy="7" r="1.2" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1.2" fill="currentColor"/></svg></button>
     <button class="ibtn" id="theme" type="button" aria-label="Light or dark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
     <button class="menu" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   </div>
   <div class="drawer" id="drawer"><a href="#about" data-k="nAbout">About</a><a href="#story" data-k="nStory">Biography</a><a href="#skills" data-k="nSkills">Skills</a><a href="#services" data-k="nServ">Services</a><a href="#work" data-k="nWork">Work</a><a href="#awards" data-k="nAwards">Achievements</a><a href="#gallery" data-k="nGal">Gallery</a><a href="#journey" data-k="nJourney">Journey</a><a href="#contact" data-k="nContact">Contact</a></div>
 </div></nav>
+
+<div class="cust" id="cust" role="dialog" aria-label="Customize"><h4 id="cuT"></h4><p id="cuD"></p><div class="lbl" id="cuC"></div><div class="sw" id="sw"></div><div class="lbl" id="cuM"></div><div class="mrow"><button type="button" id="mDark"></button><button type="button" id="mLight"></button></div><button type="button" class="creset" id="cuR"></button></div>
 
 <header class="hero" id="top">
   <div class="aura" aria-hidden="true"></div>
@@ -678,7 +760,8 @@ html.paused .live::before{animation-play-state:paused!important}
     <h2 data-k="sT"></h2>
     <p class="kicker" data-k="sK"></p>
   </div>
-  <div class="grid" id="skillGrid"></div>
+  <div class="grid g4" id="skillGrid"></div>
+  <div class="langs" id="langs"></div>
 </div></section>
 
 <section id="services"><div class="wrap">
@@ -722,7 +805,8 @@ html.paused .live::before{animation-play-state:paused!important}
     <h2 data-k="awT"></h2>
     <p class="kicker" data-k="awK"></p>
   </div>
-  <div class="aw" id="awGrid"></div>
+  <div class="awtools" id="awF" role="group"></div>
+  <div class="aw wall" id="awGrid"></div>
 </div></section>
 
 <section id="gallery"><div class="wrap">
@@ -821,7 +905,7 @@ html.paused .live::before{animation-play-state:paused!important}
       aT:"A little about me",a1:"I'm Adnan Bin Sayeed, a Class VIII student from Sylhet, and my class roll is 2. I always love to make something special, and I enjoy turning my ideas into real, useful work.",a2:"This page is my corner of the internet: who I am, what I can do, what I've built so far and how to reach me. I'm always open to new people, new projects and good conversations.",
       facts:[["Name","Adnan Bin Sayeed"],["I am","Student & Designer"],["Class","VIII (Eight)"],["Class roll","2"],["Madrasah","Shahjalal Jameya Islamia Kamil M.A. Madrasah"],["From","Sylhet, Bangladesh"],["Languages","Bangla, English, Arabic"],["Email","adnansayeed2023@gmail.com"]],
       sT:"What I'm good at",sK:"Things I practise every day, from my madrasah lessons to the things I build.",
-      skills:[["Building with AI","Made Al Bayan AI, a full learning website, from idea to live site."],["Designer","I design websites, posters, logos and social media posts with clean layouts."],["Learning fast","Picking up new tools and subjects quickly, step by step."]],
+      skills:[["Building with AI","Made Al Bayan AI, a full learning website, from idea to live site."],["Designer","I design websites, posters, logos and social media posts with clean layouts."],["Learning fast","Picking up new tools and subjects quickly, step by step."],["Arabic language","Studying Sarf, Nahu and Arabic. 1st in my Arabic course and 3rd in Arabic speech."]],
       wT:"Things I've made",wK:"My biggest project so far, live on the web for anyone to use.",live:"Live now",pD:"My own AI website for learning, in Bangla, English and Arabic. Ask it anything, and it answers with Quran and Hadith references in Arabic first.",feats:["Quran with qari recitation","Hadith with Arabic text","Arabic & English learning","Math and science help"],go:"Visit Al Bayan AI",p2T:"This website",p2D:"My personal page, in Bangla, English and Arabic, with a light and dark look.",p3T:"More coming soon",p3D:"I'm always working on something new. Check back soon.",
       awT:"Achievements",awK:"Certificates and prizes from my studies and competitions.",
       jT:"My journey",jK:"The road so far, newest first.",
@@ -831,7 +915,7 @@ html.paused .live::before{animation-play-state:paused!important}
       aT:"আমার সম্পর্কে কিছু কথা",a1:"আমি আদনান বিন সাঈদ, সিলেটের অষ্টম শ্রেণির শিক্ষার্থী, আমার ক্লাস রোল ২। আমি সবসময় বিশেষ কিছু বানাতে ভালোবাসি, আর নিজের আইডিয়াকে সত্যিকারের কাজে রূপ দিতে আমার ভালো লাগে।",a2:"এই পেজটা ইন্টারনেটে আমার নিজের একটা জায়গা: আমি কে, কী পারি, এখন পর্যন্ত কী করেছি আর কীভাবে আমার সাথে যোগাযোগ করা যায়। নতুন মানুষ, নতুন কাজ আর ভালো আলোচনার জন্য আমি সবসময় আগ্রহী।",
       facts:[["নাম","আদনান বিন সাঈদ"],["পরিচয়","শিক্ষার্থী ও ডিজাইনার"],["শ্রেণি","অষ্টম"],["ক্লাস রোল","২"],["মাদ্রাসা","শাহজালাল জামেয়া ইসলামিয়া কামিল এম.এ. মাদ্রাসা"],["ঠিকানা","সিলেট, বাংলাদেশ"],["ভাষা","বাংলা, ইংরেজি, আরবি"],["ইমেইল","adnansayeed2023@gmail.com"]],
       sT:"আমি যা ভালো পারি",sK:"মাদ্রাসার পড়া থেকে শুরু করে নিজের বানানো কাজ পর্যন্ত, যা রোজ চর্চা করি।",
-      skills:[["AI দিয়ে বানানো","আইডিয়া থেকে লাইভ সাইট পর্যন্ত পুরো Al Bayan AI বানিয়েছি।"],["ডিজাইনার","ওয়েবসাইট, পোস্টার, লোগো আর সোশ্যাল মিডিয়া পোস্ট ডিজাইন করি, পরিষ্কার লেআউটে।"],["দ্রুত শেখা","নতুন টুল আর বিষয় ধাপে ধাপে তাড়াতাড়ি শিখে নিই।"]],
+      skills:[["AI দিয়ে বানানো","আইডিয়া থেকে লাইভ সাইট পর্যন্ত পুরো Al Bayan AI বানিয়েছি।"],["ডিজাইনার","ওয়েবসাইট, পোস্টার, লোগো আর সোশ্যাল মিডিয়া পোস্ট ডিজাইন করি, পরিষ্কার লেআউটে।"],["দ্রুত শেখা","নতুন টুল আর বিষয় ধাপে ধাপে তাড়াতাড়ি শিখে নিই।"],["আরবি ভাষা","সরফ, নাহু আর আরবি শিখছি। আরবি কোর্সে প্রথম, আরবি বক্তৃতায় তৃতীয়।"]],
       wT:"আমার কাজ",wK:"এখন পর্যন্ত আমার সবচেয়ে বড় প্রজেক্ট, ইন্টারনেটে লাইভ, যে কেউ ব্যবহার করতে পারে।",live:"এখন লাইভ",pD:"শেখার জন্য আমার নিজের বানানো AI ওয়েবসাইট, বাংলা, ইংরেজি ও আরবিতে। যেকোনো প্রশ্ন করুন, উত্তরে আগে আরবিতে কুরআন-হাদিসের রেফারেন্স দেয়।",feats:["কারীর তিলাওয়াতসহ কুরআন","আরবি মূল পাঠসহ হাদিস","আরবি ও ইংরেজি শেখা","গণিত ও বিজ্ঞানে সাহায্য"],go:"Al Bayan AI দেখুন",p2T:"এই ওয়েবসাইট",p2D:"আমার নিজের পেজ, বাংলা, ইংরেজি ও আরবিতে, লাইট আর ডার্ক দুই রূপে।",p3T:"আরও আসছে",p3D:"সবসময় নতুন কিছু বানাচ্ছি। শিগগিরই আবার দেখুন।",
       awT:"আমার অর্জন",awK:"পড়াশোনা আর প্রতিযোগিতায় পাওয়া আমার সনদ ও পুরস্কার।",
       jT:"আমার পথচলা",jK:"এখন পর্যন্ত যা পেরিয়েছি, নতুনটা আগে।",
@@ -841,7 +925,7 @@ html.paused .live::before{animation-play-state:paused!important}
       aT:"نبذة عني",a1:"أنا عدنان بن سعيد، طالب في الصف الثامن من سلهت، ورقمي في الفصل ٢. أحبّ دائمًا أن أصنع شيئًا مميزًا، وأستمتع بتحويل أفكاري إلى أعمال حقيقية نافعة.",a2:"هذه الصفحة مكاني على الإنترنت: من أنا، وماذا أُحسن، وما صنعتُه حتى الآن، وكيف تتواصل معي. أرحّب دائمًا بالتعارف والمشاريع الجديدة والحوار النافع.",
       facts:[["الاسم","عدنان بن سعيد"],["أنا","طالب ومصمّم"],["الصف","الثامن"],["رقم الفصل","٢"],["المدرسة","مدرسة شاه جلال الجامعة الإسلامية الكاملة"],["من","سلهت، بنغلاديش"],["اللغات","البنغالية، الإنجليزية، العربية"],["البريد","adnansayeed2023@gmail.com"]],
       sT:"ما أُتقنه",sK:"أشياء أمارسها كل يوم، من دروس المدرسة إلى ما أصنعه بيدي.",
-      skills:[["البناء بالذكاء الاصطناعي","صنعتُ «البيان AI»، موقعًا تعليميًا كاملًا من الفكرة حتى النشر."],["مصمّم","أصمّم المواقع والملصقات والشعارات ومنشورات التواصل الاجتماعي بتنسيق نظيف."],["التعلّم السريع","أتعلّم الأدوات والمواد الجديدة بسرعة، خطوة بخطوة."]],
+      skills:[["البناء بالذكاء الاصطناعي","صنعتُ «البيان AI»، موقعًا تعليميًا كاملًا من الفكرة حتى النشر."],["مصمّم","أصمّم المواقع والملصقات والشعارات ومنشورات التواصل الاجتماعي بتنسيق نظيف."],["التعلّم السريع","أتعلّم الأدوات والمواد الجديدة بسرعة، خطوة بخطوة."],["اللغة العربية","أدرس الصرف والنحو والعربية. الأول في دورة العربية والثالث في الخطابة العربية."]],
       wT:"أعمالي",wK:"أكبر مشاريعي حتى الآن، متاح على الإنترنت للجميع.",live:"متاح الآن",pD:"موقعي التعليمي بالذكاء الاصطناعي، بالبنغالية والإنجليزية والعربية. اسأله أي سؤال، فيجيبك بالآيات والأحاديث بالعربية أولًا.",feats:["القرآن بتلاوة القرّاء","الحديث بنصّه العربي","تعلّم العربية والإنجليزية","مساعدة في الرياضيات والعلوم"],go:"زُر البيان AI",p2T:"هذا الموقع",p2D:"صفحتي الشخصية بثلاث لغات، بمظهر فاتح وداكن.",p3T:"المزيد قريبًا",p3D:"أعمل دائمًا على شيء جديد. عُد قريبًا.",
       awT:"إنجازاتي",awK:"شهادات وجوائز نلتُها في دراستي وفي المسابقات.",
       jT:"مسيرتي",jK:"الطريق حتى الآن، الأحدث أولًا.",
@@ -850,13 +934,14 @@ html.paused .live::before{animation-play-state:paused!important}
   const icons=[
     ['#f3f3f5','#024950','<rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 18v2M15 18v2"/>'],
     ['#f3f3f5','#024950','<path d="M4 20l4-1 11-11-3-3L5 16Z"/><path d="M14 6l3 3"/>'],
-    ['#f3f3f5','#024950','<path d="M13 3L5 14h6l-1 7 8-11h-6Z"/>']
+    ['#f3f3f5','#024950','<path d="M13 3L5 14h6l-1 7 8-11h-6Z"/>'],
+    ['#f3f3f5','#024950','<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19V5M9 8h6M9 12h4"/>']
   ];
   const awards=[
-    {img:"ceremony.jpg",cap:{en:"Receiving the certificate at the Certificate & Prize Giving Ceremony, Al Bayan Institute, 16 January 2026",bn:"সনদ ও পুরস্কার বিতরণী অনুষ্ঠানে সার্টিফিকেট গ্রহণ, আল-বায়ান ইনস্টিটিউট, ১৬ জানুয়ারি ২০২৬",ar:"استلام الشهادة في حفل توزيع الشهادات والجوائز، معهد البيان، ١٦ يناير ٢٠٢٦"},mark:"1",rib:["#024950","#003135"],en:{rank:"1st position",t:"Intermediate Sarf-Nahu & Arabic Language Course",m:[["By","Al Bayan Institute"],["Course","50 hours"],["Awarded","16 January 2026"]]},ar:{rank:"المركز الأول",t:"دورة الصرف والنحو واللغة العربية – المستوى المتوسط",m:[["الجهة","معهد البيان"],["المدة","٥٠ ساعة تعليمية"],["التاريخ","١٦ يناير ٢٠٢٦"]]},bn:{rank:"প্রথম স্থান",t:"ইন্টারমিডিয়েট সরফ-নাহু ও আরবি ভাষা কোর্স",m:[["প্রতিষ্ঠান","আল-বায়ান ইনস্টিটিউট"],["কোর্স","৫০ ঘণ্টা"],["প্রদান","১৬ জানুয়ারি ২০২৬"]]}},
-    {img:"seerah.jpg",bronze:1,cap:{en:"Receiving the 3rd place crest at the Seerah Competition prize giving and Seeratun Nabi ﷺ Mahfil",bn:"সীরাত প্রতিযোগিতার পুরস্কার বিতরণী ও সীরাতুন্নবী (সা.) মাহফিলে তৃতীয় স্থানের ক্রেস্ট গ্রহণ",ar:"استلام درع المركز الثالث في حفل توزيع جوائز مسابقة السيرة"},mark:"3",rib:["#024950","#003135"],en:{rank:"3rd place",t:"Seerah Competition, Group Ta",m:[["Date","19 September 2026"],["Event","Cultural & Seerah Competition"],["Organised by","Shahjalal Jameya Islamia Kamil Madrasah, Sylhet"],["Prize","Crest"]]},ar:{rank:"المركز الثالث",t:"مسابقة السيرة النبوية، مجموعة «تا»",m:[["التاريخ","١٩ سبتمبر ٢٠٢٦"],["الفعالية","المسابقة الثقافية ومسابقة السيرة"],["الجهة المنظمة","مدرسة شاه جلال الجامعة الإسلامية الكاملة، سلهت"],["الجائزة","درع تكريمي"]]},bn:{rank:"তৃতীয় স্থান",t:"সীরাত প্রতিযোগিতা, ‘তা’ গ্রুপ",m:[["তারিখ","১৯ সেপ্টেম্বর ২০২৬"],["অনুষ্ঠান","তামাদ্দুনিক ও সীরাত প্রতিযোগিতা"],["আয়োজক","শাহজালাল জামেয়া ইসলামিয়া কামিল মাদ্রাসা, সিলেট"],["পুরস্কার","ক্রেস্ট"]]}},
-    {img:"arabic-speech.jpg",bronze:1,cap:{en:"Receiving the 3rd place prize for Arabic speech at the same ceremony",bn:"একই অনুষ্ঠানে আরবি বক্তৃতায় তৃতীয় স্থানের পুরস্কার গ্রহণ",ar:"استلام جائزة المركز الثالث في الخطابة العربية في الحفل نفسه"},mark:"3",rib:["#0f6b6e","#0b4a4c"],en:{rank:"3rd place",t:"Arabic Speech Competition",m:[["Event","Cultural & Seerah Competition"],["Organised by","Shahjalal Jameya Islamia Kamil Madrasah, Sylhet"]]},ar:{rank:"المركز الثالث",t:"مسابقة الخطابة باللغة العربية",m:[["الفعالية","المسابقة الثقافية ومسابقة السيرة"],["الجهة المنظمة","مدرسة شاه جلال الجامعة الإسلامية الكاملة، سلهت"]]},bn:{rank:"তৃতীয় স্থান",t:"আরবি বক্তৃতা প্রতিযোগিতা",m:[["অনুষ্ঠান","তামাদ্দুনিক ও সীরাত প্রতিযোগিতা"],["আয়োজক","শাহজালাল জামেয়া ইসলামিয়া কামিল মাদ্রাসা, সিলেট"]]}},
-    {mark:"★",rib:["#024950","#003135"],en:{rank:"Special Grade",t:"National Merit Scholarship Examination 2025",m:[["By","Islamic Education Society"],["Class","Seven (Madrasah)"],["Held on","20 December 2025"]]},ar:{rank:"تقدير خاص",t:"اختبار المنحة الوطنية للمتفوقين ٢٠٢٥",m:[["الجهة","جمعية التعليم الإسلامي"],["الصف","السابع (مدرسة)"],["التاريخ","٢٠ ديسمبر ٢٠٢٥"]]},bn:{rank:"বিশেষ গ্রেড",t:"জাতীয় মেধাবৃত্তি পরীক্ষা ২০২৫",m:[["প্রতিষ্ঠান","ইসলামিক এডুকেশন সোসাইটি"],["শ্রেণি","সপ্তম (মাদ্রাসা)"],["পরীক্ষা","২০ ডিসেম্বর ২০২৫"]]}}
+    {c:"course",img:"ceremony.jpg",cap:{en:"Receiving the certificate at the Certificate & Prize Giving Ceremony, Al Bayan Institute, 16 January 2026",bn:"সনদ ও পুরস্কার বিতরণী অনুষ্ঠানে সার্টিফিকেট গ্রহণ, আল-বায়ান ইনস্টিটিউট, ১৬ জানুয়ারি ২০২৬",ar:"استلام الشهادة في حفل توزيع الشهادات والجوائز، معهد البيان، ١٦ يناير ٢٠٢٦"},mark:"1",rib:["#024950","#003135"],en:{rank:"1st position",t:"Intermediate Sarf-Nahu & Arabic Language Course",m:[["By","Al Bayan Institute"],["Course","50 hours"],["Awarded","16 January 2026"]]},ar:{rank:"المركز الأول",t:"دورة الصرف والنحو واللغة العربية – المستوى المتوسط",m:[["الجهة","معهد البيان"],["المدة","٥٠ ساعة تعليمية"],["التاريخ","١٦ يناير ٢٠٢٦"]]},bn:{rank:"প্রথম স্থান",t:"ইন্টারমিডিয়েট সরফ-নাহু ও আরবি ভাষা কোর্স",m:[["প্রতিষ্ঠান","আল-বায়ান ইনস্টিটিউট"],["কোর্স","৫০ ঘণ্টা"],["প্রদান","১৬ জানুয়ারি ২০২৬"]]}},
+    {c:"comp",img:"seerah.jpg",bronze:1,cap:{en:"Receiving the 3rd place crest at the Seerah Competition prize giving and Seeratun Nabi ﷺ Mahfil",bn:"সীরাত প্রতিযোগিতার পুরস্কার বিতরণী ও সীরাতুন্নবী (সা.) মাহফিলে তৃতীয় স্থানের ক্রেস্ট গ্রহণ",ar:"استلام درع المركز الثالث في حفل توزيع جوائز مسابقة السيرة"},mark:"3",rib:["#024950","#003135"],en:{rank:"3rd place",t:"Seerah Competition, Group Ta",m:[["Date","19 September 2026"],["Event","Cultural & Seerah Competition"],["Organised by","Shahjalal Jameya Islamia Kamil Madrasah, Sylhet"],["Prize","Crest"]]},ar:{rank:"المركز الثالث",t:"مسابقة السيرة النبوية، مجموعة «تا»",m:[["التاريخ","١٩ سبتمبر ٢٠٢٦"],["الفعالية","المسابقة الثقافية ومسابقة السيرة"],["الجهة المنظمة","مدرسة شاه جلال الجامعة الإسلامية الكاملة، سلهت"],["الجائزة","درع تكريمي"]]},bn:{rank:"তৃতীয় স্থান",t:"সীরাত প্রতিযোগিতা, ‘তা’ গ্রুপ",m:[["তারিখ","১৯ সেপ্টেম্বর ২০২৬"],["অনুষ্ঠান","তামাদ্দুনিক ও সীরাত প্রতিযোগিতা"],["আয়োজক","শাহজালাল জামেয়া ইসলামিয়া কামিল মাদ্রাসা, সিলেট"],["পুরস্কার","ক্রেস্ট"]]}},
+    {c:"comp",img:"arabic-speech.jpg",bronze:1,cap:{en:"Receiving the 3rd place prize for Arabic speech at the same ceremony",bn:"একই অনুষ্ঠানে আরবি বক্তৃতায় তৃতীয় স্থানের পুরস্কার গ্রহণ",ar:"استلام جائزة المركز الثالث في الخطابة العربية في الحفل نفسه"},mark:"3",rib:["#0f6b6e","#0b4a4c"],en:{rank:"3rd place",t:"Arabic Speech Competition",m:[["Event","Cultural & Seerah Competition"],["Organised by","Shahjalal Jameya Islamia Kamil Madrasah, Sylhet"]]},ar:{rank:"المركز الثالث",t:"مسابقة الخطابة باللغة العربية",m:[["الفعالية","المسابقة الثقافية ومسابقة السيرة"],["الجهة المنظمة","مدرسة شاه جلال الجامعة الإسلامية الكاملة، سلهت"]]},bn:{rank:"তৃতীয় স্থান",t:"আরবি বক্তৃতা প্রতিযোগিতা",m:[["অনুষ্ঠান","তামাদ্দুনিক ও সীরাত প্রতিযোগিতা"],["আয়োজক","শাহজালাল জামেয়া ইসলামিয়া কামিল মাদ্রাসা, সিলেট"]]}},
+    {c:"sch",mark:"★",rib:["#024950","#003135"],en:{rank:"Special Grade",t:"National Merit Scholarship Examination 2025",m:[["By","Islamic Education Society"],["Class","Seven (Madrasah)"],["Held on","20 December 2025"]]},ar:{rank:"تقدير خاص",t:"اختبار المنحة الوطنية للمتفوقين ٢٠٢٥",m:[["الجهة","جمعية التعليم الإسلامي"],["الصف","السابع (مدرسة)"],["التاريخ","٢٠ ديسمبر ٢٠٢٥"]]},bn:{rank:"বিশেষ গ্রেড",t:"জাতীয় মেধাবৃত্তি পরীক্ষা ২০২৫",m:[["প্রতিষ্ঠান","ইসলামিক এডুকেশন সোসাইটি"],["শ্রেণি","সপ্তম (মাদ্রাসা)"],["পরীক্ষা","২০ ডিসেম্বর ২০২৫"]]}}
   ];
   const tl=[
     {g:0,en:["Now","Building Al Bayan AI","Growing my AI learning website with Quran, Hadith, Arabic and more."],bn:["এখন","Al Bayan AI বানানো","কুরআন, হাদিস, আরবি আর আরও অনেক কিছু দিয়ে আমার AI ওয়েবসাইট বড় করছি।"],ar:["الآن","أبني البيان AI","أطوّر موقعي التعليمي بالقرآن والحديث والعربية وغيرها."]},
@@ -866,6 +951,29 @@ html.paused .live::before{animation-play-state:paused!important}
     {g:1,en:["Dec 2025","Scholarship, Special Grade","Passed the National Merit Scholarship Examination 2025 with Special Grade in Class Seven."],bn:["ডিসেম্বর ২০২৫","বৃত্তি, বিশেষ গ্রেড","সপ্তম শ্রেণিতে জাতীয় মেধাবৃত্তি পরীক্ষা ২০২৫-এ বিশেষ গ্রেডে উত্তীর্ণ।"],ar:["ديسمبر ٢٠٢٥","منحة بتقدير خاص","نجحتُ في اختبار المنحة الوطنية للمتفوقين ٢٠٢٥ بتقدير خاص في الصف السابع."]}
   ];
   const medal=(r,m,bz)=>`<svg viewBox="0 0 100 124" aria-hidden="true"><path d="M30 0h16l10 48H40Z" fill="${r[0]}"/><path d="M70 0H54L44 48h16Z" fill="${r[1]}"/><circle cx="50" cy="82" r="40" fill="${bz?'#c98a4b':'#e2a93b'}"/><circle cx="50" cy="82" r="40" fill="none" stroke="${bz?'#9c6430':'#b9831f'}" stroke-width="3"/><g transform="translate(50 82)"><rect x="-22" y="-22" width="44" height="44" fill="${bz?'#e3ad78':'#f3cf6e'}"/><rect x="-22" y="-22" width="44" height="44" fill="${bz?'#e3ad78':'#f3cf6e'}" transform="rotate(45)"/></g><path d="M26 68a30 30 0 0 1 40-14" stroke="#fff" stroke-width="4" fill="none" opacity=".6" stroke-linecap="round"/><text x="50" y="94" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800" font-size="32" fill="${bz?'#5a3410':'#6b4600'}">${m}</text></svg>`;
+
+  const AWL={en:{all:"All",course:"Courses & certificates",comp:"Competitions",sch:"Scholarship",more:"More coming",moreD:"New certificates will be added here soon.",zoom:"View photo"},
+    bn:{all:"সব",course:"কোর্স ও সনদ",comp:"প্রতিযোগিতা",sch:"বৃত্তি",more:"আরও আসছে",moreD:"নতুন সনদগুলো শিগগিরই এখানে যোগ হবে।",zoom:"ছবি দেখুন"},
+    ar:{all:"الكل",course:"دورات وشهادات",comp:"مسابقات",sch:"منحة",more:"المزيد قريبًا",moreD:"ستُضاف الشهادات الجديدة هنا قريبًا.",zoom:"عرض الصورة"}};
+  let awFilter='all';
+  const certArt=(m,bz)=>`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="cA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#05383d"/><stop offset="1" stop-color="#021316"/></linearGradient><pattern id="cP" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M13 3l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="none" stroke="#AFDDE5" stroke-opacity=".08"/></pattern></defs><rect width="400" height="300" fill="url(#cA)"/><rect width="400" height="300" fill="url(#cP)"/><g transform="rotate(-4 200 160)"><rect x="70" y="52" width="260" height="190" rx="6" fill="#fbf4ea"/><rect x="80" y="62" width="240" height="170" rx="3" fill="none" stroke="#c9a46a" stroke-width="2"/><rect x="86" y="68" width="228" height="158" rx="2" fill="none" stroke="#c9a46a" stroke-opacity=".5"/><rect x="150" y="86" width="100" height="10" rx="5" fill="#024950"/><rect x="120" y="108" width="160" height="6" rx="3" fill="#cdb79a"/><rect x="135" y="124" width="130" height="14" rx="4" fill="#DA6D58" opacity=".85"/><rect x="115" y="150" width="170" height="5" rx="2.5" fill="#d9c8b0"/><rect x="130" y="162" width="140" height="5" rx="2.5" fill="#d9c8b0"/><path d="M110 206h60M230 206h60" stroke="#b9a283" stroke-width="2"/><g transform="translate(200 200)"><circle r="22" fill="${bz?'#c98a4b':'#e2a93b'}"/><circle r="16" fill="none" stroke="#fff" stroke-opacity=".6" stroke-dasharray="2 3"/><text y="7" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800" font-size="20" fill="#5a3a08">${m}</text><path d="M-12 18l-6 26 12-7 6 9 4-26M12 18l6 26-12-7" fill="#024950"/></g></g></svg>`;
+  const renderAwards=()=>{
+    const L=AWL[lang],cats=['all','course','comp','sch'],cnt=c=>c=='all'?awards.length:awards.filter(a=>a.c==c).length;
+    $('awF').setAttribute('aria-label',L.all);
+    $('awF').innerHTML=cats.map(c=>`<button type="button" data-c="${c}" aria-pressed="${awFilter==c}">${L[c]}<sup>${nfx(cnt(c))}</sup></button>`).join('');
+    let pi=0;
+    $('awGrid').innerHTML=awards.map(a=>{const o=a[lang];const md=medal(a.rib||["#DA6D58","#964734"],a.mark||(a.bronze?"3":"1"),a.bronze).replace('<svg ','<svg class="md" ');
+      const vis=awFilter=='all'||a.c==awFilter;
+      const ph=a.img?`<button type="button" class="ath" data-p="${pi++}" aria-label="${L.zoom}: ${o.t}"><img src="${a.img}" alt="${a.cap[lang]}" width="1400" height="1050" loading="lazy"><span class="cat">${L[a.c]}</span>${md}<span class="zm" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></button>`
+        :`<div class="ath" style="cursor:default">${certArt(a.mark||"★",a.bronze)}<span class="cat">${L[a.c]}</span>${md}</div>`;
+      return `<article class="award${a.img?' pic':''}"${vis?'':' hidden'}>${ph}<div class="ab"><div class="rank">${o.rank}</div><h3>${o.t}</h3><div class="meta">${o.m.map(([k,v])=>`<div>${k}: <b>${v}</b></div>`).join('')}</div></div></article>`}).join('')
+      +(awFilter=='all'?`<div class="award awmore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M12 8v6M9 11h6M8 21h8"/></svg><b>${L.more}</b><span>${L.moreD}</span></div>`:'');
+  };
+  const nfx=n=>lang=="bn"?bnNum(n):lang=="ar"?String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]):String(n);
+  const LANGS={en:[["Bangla","বাংলা","Mother tongue",5],["English","English","Read & write",4],["Arabic","العربية","Studying & speaking",4]],
+    bn:[["বাংলা","বাংলা","মাতৃভাষা",5],["ইংরেজি","English","পড়ি ও লিখি",4],["আরবি","العربية","শিখছি ও বলি",4]],
+    ar:[["البنغالية","বাংলা","اللغة الأم",5],["الإنجليزية","English","قراءة وكتابة",4],["العربية","العربية","أدرسها وأتحدثها",4]]};
+  const renderLangs=()=>{$('langs').innerHTML=LANGS[lang].map(([n,g,d,f],i)=>`<div class="lang"><i>${n}</i><b class="${i==2?'ar':''}" lang="${['bn','en','ar'][i]}">${g}</b><div><div class="dots" aria-hidden="true">${[1,2,3,4,5].map(k=>`<em class="${k<=f?'f':''}"></em>`).join('')}</div><span>${d}</span></div></div>`).join('')};
   let lang="bn";
   const bnNum=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
   const $=id=>document.getElementById(id);
@@ -901,7 +1009,7 @@ html.paused .live::before{animation-play-state:paused!important}
     const nf=n=>lang=="bn"?bnNum(n):lang=="ar"?String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]):n;
     $('servGrid').innerHTML=t.serv.map(([h,d],i)=>`<div class="card"><span class="num">${nf('0'+(i+1))}</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#024950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${sic[i]}</svg></div><h3>${h}</h3><p>${d}</p></div>`).join('');
     $('feats').innerHTML=t.feats.map(x=>`<li>${x}</li>`).join('');
-    $('awGrid').innerHTML=awards.map(a=>{const o=a[lang];return `<article class="award${a.img?' pic':''}">${a.img?`<figure class="aph"><img src="${a.img}" alt="${a.cap[lang]}" width="1400" height="1050" loading="lazy"><figcaption>${a.cap[lang]}</figcaption></figure>`:''}${medal(a.rib,a.mark,a.bronze)}<div><div class="rank">${o.rank}</div><h3>${o.t}</h3><div class="meta">${o.m.map(([k,v])=>`<div>${k}: <b>${v}</b></div>`).join('')}</div></div></article>`}).join('');
+    renderAwards();renderLangs();renderCust();
     $('tl').innerHTML=tl.map(o=>{const [y,h,d]=o[lang];return `<li${o.g?' class="g"':''}><span class="yr">${y}</span><div><h3>${h}</h3><p>${d}</p></div></li>`}).join('');
     ['En','Bn','Ar'].forEach(k=>$('b'+k).setAttribute('aria-pressed',lang==k.toLowerCase()));
     $('note').textContent='';
@@ -909,6 +1017,26 @@ html.paused .live::before{animation-play-state:paused!important}
     document.querySelectorAll('.sn').forEach(e=>e.textContent=dig(e.dataset.s));
     showAyah();typer();if(window.__gal)window.__gal();if(chatReady)chatLang();
   };
+
+  const ACC=[["sunset","#FEAF76","#0FA4AF"],["emerald","#F2C96B","#34D399"],["royal","#CDBDFF","#7AA2FF"],["rose","#FFB8C6","#EE6A8C"],["ocean","#93DBFF","#22D3EE"],["gold","#FFD480","#E9A23B"]];
+  const CUL={en:{t:"Make it yours",d:"Pick the colours you like. Your choice is saved on this device.",c:"Colour theme",m:"Mode",dk:"Dark",lt:"Light",r:"Reset to default",n:["Sunset","Emerald","Royal","Rose","Ocean","Gold"]},
+    bn:{t:"নিজের মতো সাজান",d:"পছন্দের রং বেছে নিন। আপনার পছন্দ এই ডিভাইসে মনে থাকবে।",c:"রঙের থিম",m:"মোড",dk:"ডার্ক",lt:"লাইট",r:"আগের মতো করুন",n:["সূর্যাস্ত","পান্না","রাজকীয়","গোলাপ","সমুদ্র","সোনালি"]},
+    ar:{t:"خصّصه كما تحب",d:"اختر الألوان التي تعجبك، وسيُحفظ اختيارك على هذا الجهاز.",c:"لون السمة",m:"الوضع",dk:"داكن",lt:"فاتح",r:"إعادة الافتراضي",n:["الغروب","الزمرد","الملكي","الوردي","المحيط","الذهبي"]}};
+  function renderCust(){const L=CUL[lang],cur=document.documentElement.dataset.accent||'sunset',dk=document.documentElement.dataset.theme!='light';
+    $('cuT').textContent=L.t;$('cuD').textContent=L.d;$('cuC').textContent=L.c;$('cuM').textContent=L.m;$('cuR').textContent=L.r;$('mDark').textContent=L.dk;$('mLight').textContent=L.lt;
+    $('mDark').setAttribute('aria-pressed',dk);$('mLight').setAttribute('aria-pressed',!dk);$('custBtn').setAttribute('aria-label',L.t);
+    $('sw').innerHTML=ACC.map(([k,a,b],i)=>`<button type="button" data-a="${k}" style="--a:${a};--b:${b}" aria-pressed="${cur==k}" aria-label="${L.n[i]}" title="${L.n[i]}"></button>`).join('')}
+  const setAcc=k=>{if(k=='sunset')delete document.documentElement.dataset.accent;else document.documentElement.dataset.accent=k;try{localStorage.setItem('abs-accent',k)}catch(e){}renderCust()};
+  const setMode=m=>{document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme',m)}catch(e){}renderCust()};
+  $('cust').addEventListener('click',e=>e.stopPropagation());
+  $('sw').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setAcc(b.dataset.a)});
+  $('mDark').addEventListener('click',()=>setMode('dark'));$('mLight').addEventListener('click',()=>setMode('light'));
+  $('cuR').addEventListener('click',()=>{setAcc('sunset');setMode('dark')});
+  const custT=o=>{$('cust').classList.toggle('on',o);$('custBtn').setAttribute('aria-expanded',o)};
+  $('custBtn').addEventListener('click',e=>{e.stopPropagation();custT(!$('cust').classList.contains('on'))});
+  document.addEventListener('click',e=>{if($('cust').classList.contains('on')&&!e.target.closest('#cust'))custT(false)});
+  addEventListener('keydown',e=>{if(e.key=='Escape')custT(false)});
+  $('theme').addEventListener('click',()=>setTimeout(renderCust,0));
   const setLang=l=>{lang=l;try{localStorage.setItem('abs-lang',l)}catch(e){}render()};
   $('bEn').addEventListener('click',()=>setLang('en'));
   $('bBn').addEventListener('click',()=>setLang('bn'));
@@ -1000,10 +1128,14 @@ html.paused .live::before{animation-play-state:paused!important}
   ];
   let gi=0;
   const renderGal=()=>{const g=$('gal');if(!g)return;g.innerHTML=GAL.map((x,i)=>`<button type="button" class="gitem" data-i="${i}"><img src="${x.img}" alt="${x.t[lang]}" loading="lazy" width="1400" height="1050"><span class="gn">${dig(String(i+1).padStart(2,'0'))}</span><span class="gz" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span><span class="gc"><span class="gk">${x.k[lang]}</span><span class="gt">${x.t[lang]}</span><span class="gd">${x.d[lang]}</span></span></button>`).join('')};
-  const lbShow=i=>{gi=(i+GAL.length)%GAL.length;const x=GAL[gi];$('lbi').src=x.img;$('lbi').alt=x.t[lang];$('lbc').textContent=x.t[lang]+' · '+x.d[lang];$('lb').classList.add('on');$('lbx').focus()};
+  let LBL=null;const lbShow=i=>{const L=LBL||GAL.map(x=>({img:x.img,t:x.t[lang],d:x.d[lang]}));gi=(i+L.length)%L.length;const x=L[gi];$('lbi').src=x.img;$('lbi').alt=x.t;$('lbc').textContent=x.t+' · '+x.d;$('lb').classList.add('on');$('lbx').focus()};
+  const lbOpen=(list,i)=>{LBL=list;lbShow(i)};
   const lbHide=()=>$('lb').classList.remove('on');
   window.__gal=renderGal;renderGal();
-  if($('gal')){$('gal').addEventListener('click',e=>{const b=e.target.closest('.gitem');if(b)lbShow(+b.dataset.i)});
+  $('awF').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;awFilter=b.dataset.c;renderAwards()});
+  $('awGrid').addEventListener('click',e=>{const b=e.target.closest('.ath[data-p]');if(!b)return;const ph=awards.filter(a=>a.img).map(a=>({img:a.img,t:a[lang].t,d:a.cap[lang]}));lbOpen(ph,+b.dataset.p)});
+
+  if($('gal')){$('gal').addEventListener('click',e=>{const b=e.target.closest('.gitem');if(b){LBL=null;lbShow(+b.dataset.i)}});
     $('lbx').addEventListener('click',lbHide);$('lbp').addEventListener('click',()=>lbShow(gi-1));$('lbn').addEventListener('click',()=>lbShow(gi+1));
     $('lb').addEventListener('click',e=>{if(e.target.id=='lb')lbHide()});
     addEventListener('keydown',e=>{if(!$('lb').classList.contains('on'))return;if(e.key=='Escape')lbHide();if(e.key=='ArrowRight')lbShow(gi+1);if(e.key=='ArrowLeft')lbShow(gi-1)});}
