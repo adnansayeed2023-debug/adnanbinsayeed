@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{var ac=localStorage.getItem("abs-accent");if(/^(emerald|royal|rose|ocean|gold)$/.test(ac||""))document.documentElement.dataset.accent=ac}catch(e){}</script>
-<script>try{var t=localStorage.getItem("abs-theme");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+<script>try{var t=localStorage.getItem("abs-theme2");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
 <script>(function(){var d=document.documentElement;if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("mo-intro");setTimeout(function(){d.classList.add("mo-go")},4000)}})()</script>
 <meta name="google-site-verification" content="h8XiQp1boOX9tJlSWwIzLa7VXgnmbygaI2L60jJY01E">
 <meta name="google-site-verification" content="sv7Xpfj4L_FCkenDig7QFcFTjwz894_u1hSGs-wAeWo">
@@ -14,7 +14,7 @@
 <meta property="og:title" content="Adnan Bin Sayeed">
 <meta property="og:description" content="Student, designer and maker of Al Bayan AI.">
 <meta property="og:url" content="https://adnanbinsayeed.vercel.app/">
-<meta name="theme-color" content="#05222A">
+<meta name="theme-color" content="#FCF3E3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#05222A" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="icon" href="icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,9 +37,9 @@
   --ok:#3ddc97;--r:26px;--ease:cubic-bezier(.2,.7,.2,1);
   --fd:Outfit,"Hind Siliguri",Cairo,system-ui,sans-serif;--fs:Fraunces,Georgia,serif;--fm:"JetBrains Mono",ui-monospace,monospace}
 :root[data-theme=light]{color-scheme:light;
-  --bg:#F7F2ED;--bg2:#EDE3D9;--card:#ffffff;--ink:#0F3A47;--soft:#55686B;
+  --bg:#FCF3E3;--bg2:#EEEDE6;--card:#FFFDF8;--ink:#0F4454;--soft:#55686B;
   --line:rgba(15,68,84,.11);--line2:rgba(15,68,84,.22);
-  --acc:#B4504F;--glass:rgba(247,242,237,.78);--shadow:0 30px 60px -36px rgba(15,68,84,.4);--ok:#11804f}
+  --acc:#8A6A45;--apri:#D2B48C;--coral:#B08B63;--sea:#0F4454;--peach:#E9DCC9;--glass:rgba(247,242,237,.78);--shadow:0 30px 60px -36px rgba(15,68,84,.4);--ok:#11804f}
 
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
@@ -636,6 +636,25 @@ section.band .card,section.band .serv a,section.band .timeline li>div{box-shadow
 .giant em{-webkit-text-fill-color:transparent}
 @media (prefers-reduced-motion:reduce){.timeline::after{height:calc(100% - 20px)}.giant{background-size:100% 100%}}
 html.paused .timeline::after{height:calc(100% - 20px)}
+
+/* ===== sand light (default) ===== */
+:root[data-theme=light]{--band:#EFE6D6;--band2:#F6EFE3}
+:root[data-theme=light] body{background:linear-gradient(160deg,#FCF3E3 0%,#F4EFE6 45%,#E9EDEC 100%) fixed}
+:root[data-theme=light] .pre{background:#FCF3E3}
+:root[data-theme=light] .pre .pn{color:#0F4454}
+:root[data-theme=light] .pre .pb{background:rgba(15,68,84,.12)}
+:root[data-theme=light] .land path:nth-of-type(1){fill:#BCA88E;opacity:.5}
+:root[data-theme=light] .land path:nth-of-type(2){fill:#CAB5A7}
+:root[data-theme=light] .land path:nth-of-type(3){fill:#FCF3E3;opacity:.7}
+:root[data-theme=light] .land path:nth-of-type(4){fill:#B08B63}
+:root[data-theme=light] .land rect{fill:#0F4454}
+:root[data-theme=light] .btn.main{background:linear-gradient(120deg,#0F4454,#1A5A68);color:#FCF3E3;box-shadow:0 16px 34px -16px rgba(15,68,84,.6)}
+:root[data-theme=light] .btn.main:hover{box-shadow:0 22px 44px -16px rgba(15,68,84,.75)}
+:root[data-theme=light] .hero h1 .l2{background-image:linear-gradient(100deg,#B08B63,#8A6A45 55%,#0F4454)}
+:root[data-theme=light] .marq:not(.m2){background:linear-gradient(90deg,#CAB5A7,#E3D3BE);color:#0F4454}
+:root[data-theme=light] .marq.m2{background:#0F4454;color:#FCF3E3}
+:root[data-theme=light] .giant{background-image:linear-gradient(100deg,#B08B63,#8A6A45 45%,#0F4454)}
+:root[data-theme=light][data-accent] .btn.main{background:linear-gradient(120deg,var(--apri),var(--coral));color:#1b0c07}
 /* responsive */
 @media(max-width:1000px){
   .hgrid{grid-template-columns:minmax(0,1fr);text-align:start;padding-top:10px}
@@ -1135,7 +1154,7 @@ html.paused .live::before{animation-play-state:paused!important}
     $('mDark').setAttribute('aria-pressed',dk);$('mLight').setAttribute('aria-pressed',!dk);$('custBtn').setAttribute('aria-label',L.t);
     $('sw').innerHTML=ACC.map(([k,a,b],i)=>`<button type="button" data-a="${k}" style="--a:${a};--b:${b}" aria-pressed="${cur==k}" aria-label="${L.n[i]}" title="${L.n[i]}"></button>`).join('')}
   const setAcc=k=>{if(k=='sunset')delete document.documentElement.dataset.accent;else document.documentElement.dataset.accent=k;try{localStorage.setItem('abs-accent',k)}catch(e){}renderCust()};
-  const setMode=m=>{document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme',m)}catch(e){}renderCust()};
+  const setMode=m=>{document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme2',m)}catch(e){}renderCust()};
   $('cust').addEventListener('click',e=>e.stopPropagation());
   $('sw').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setAcc(b.dataset.a)});
   $('mDark').addEventListener('click',()=>setMode('dark'));$('mLight').addEventListener('click',()=>setMode('light'));
@@ -1164,9 +1183,9 @@ html.paused .live::before{animation-play-state:paused!important}
   tt.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   const isDark=()=>{const d=document.documentElement.dataset.theme;return d?d=="dark":matchMedia('(prefers-color-scheme: dark)').matches};
-  $('theme').addEventListener('click',e=>{const m=isDark()?"light":"dark";const apply=()=>{document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme',m)}catch(err){}};
+  $('theme').addEventListener('click',e=>{const m=isDark()?"light":"dark";const apply=()=>{document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme2',m)}catch(err){}};
     if(window.__vt)window.__vt(e.currentTarget,apply);else apply()});
-  try{const s=localStorage.getItem('abs-lang');if(s=="bn"||s=="en"||s=="ar")lang=s;const th=localStorage.getItem('abs-theme');if(th=="dark"||th=="light")document.documentElement.dataset.theme=th}catch(e){}
+  try{const s=localStorage.getItem('abs-lang');if(s=="bn"||s=="en"||s=="ar")lang=s;const th=localStorage.getItem('abs-theme2');if(th=="dark"||th=="light")document.documentElement.dataset.theme=th}catch(e){}
   render();
   fetch(API+'/api/content').then(r=>r.ok?r.json():null).then(c=>{if(c&&Object.keys(c).length){applyContent(c);render()}}).catch(()=>{});
   $('copy').addEventListener('click',async()=>{
