@@ -123,3 +123,27 @@
     }, { passive: true });
   }
 })();
+
+/* ---- v5: timeline fills as you scroll, footer name inks in ---- */
+(() => {
+  const tl = document.getElementById('tl');
+  const giant = document.querySelector('.giant');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { if (giant) giant.classList.add('lit'); return; }
+  let t = false;
+  const update = () => {
+    t = false;
+    const line = innerHeight * 0.62;
+    if (tl) {
+      const r = tl.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (line - r.top) / Math.max(1, r.height)));
+      tl.style.setProperty('--tlp', p.toFixed(3));
+      tl.querySelectorAll('li').forEach(li => li.classList.toggle('lit', li.getBoundingClientRect().top + 22 < line));
+    }
+    if (giant && !giant.classList.contains('lit') && giant.getBoundingClientRect().top < innerHeight * 0.92) giant.classList.add('lit');
+  };
+  addEventListener('scroll', () => { if (!t) { t = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  if (tl) new MutationObserver(update).observe(tl, { childList: true });
+  update();
+})();
