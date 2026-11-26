@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#041215;--bg2:#071b1f;--card:#0a2125;--ink:#eaf4f3;--soft:#9db6b8;--line:rgba(175,221,229,.12);--line2:rgba(175,221,229,.24);--apri:#FEAF76;--coral:#DA6D58;--sea:#0FA4AF;--ok:#3ddc97;--bad:#ff7a6b}
+:root{--bg:#05222A;--bg2:#082C35;--card:#0B323C;--ink:#F4EDE6;--soft:#AEBFBE;--line:rgba(141,211,206,.12);--line2:rgba(141,211,206,.24);--apri:#EAAC8B;--coral:#E56B6F;--sea:#3F9A99;--ok:#3ddc97;--bad:#ff7a6b}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 Outfit,"Hind Siliguri",Cairo,system-ui,sans-serif}
@@ -33,7 +33,7 @@ textarea.in{min-height:84px;resize:vertical;line-height:1.5}
 .btn:disabled{opacity:.55;cursor:wait}
 .err{color:var(--bad);font-size:14px;min-height:22px;margin-top:10px}
 /* app */
-header{position:sticky;top:0;z-index:20;background:rgba(4,18,21,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:20;background:rgba(5,34,42,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .hbar{display:flex;align-items:center;gap:10px;padding:12px 0;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;margin-inline-end:auto}
 .brand img{width:34px;height:34px}
@@ -81,7 +81,7 @@ details.item>summary::-webkit-details-marker{display:none}
 .addrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .toast{position:fixed;bottom:18px;left:50%;translate:-50% 0;background:var(--card);border:1px solid var(--line2);padding:12px 18px;border-radius:14px;box-shadow:0 20px 40px -20px #000;z-index:50;display:none;max-width:calc(100% - 28px)}
 .toast.on{display:block}
-.help{background:linear-gradient(140deg,rgba(254,175,118,.12),transparent 60%),var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft);margin-bottom:16px}
+.help{background:linear-gradient(140deg,rgba(234,172,139,.12),transparent 60%),var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:14px;color:var(--soft);margin-bottom:16px}
 .help b{color:var(--ink)}
 .msg{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:grid;gap:10px}
 .msg .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
@@ -185,7 +185,7 @@ const ED={
  awards:{title:'অর্জন',desc:'সনদ, পুরস্কার আর প্রতিযোগিতা। উপরে যেটা, সাইটেও সেটা আগে দেখাবে।',
   sum:(x)=>[lt({en:x.en&&x.en.t,bn:x.bn&&x.bn.t,ar:x.ar&&x.ar.t},'(নাম নেই)'),(AW_CAT.find(c=>c[0]==x.c)||['',''])[1]+' · '+((x[L]||{}).rank||'')],
   thumb:x=>x.img,
-  blank:()=>({c:'course',mark:'✓',rib:['#DA6D58','#964734'],doc:1,img:'',cap:{en:'',bn:'',ar:''},en:{rank:'',t:'',m:[]},bn:{rank:'',t:'',m:[]},ar:{rank:'',t:'',m:[]}}),
+  blank:()=>({c:'course',mark:'✓',rib:['#E56B6F','#B56576'],doc:1,img:'',cap:{en:'',bn:'',ar:''},en:{rank:'',t:'',m:[]},bn:{rank:'',t:'',m:[]},ar:{rank:'',t:'',m:[]}}),
   body:(i)=>{const b=`awards.${i}`;return F.sel('ধরন',b+'.c',AW_CAT)+F.text('মেডেলে কী লেখা থাকবে',b+'.mark',{hint:'যেমন 1, 2, 3, ★ বা ✓'})
    +F.text('ব্যাজ (স্থান/গ্রেড)',`${b}.${L}.rank`,{lang:1,ph:'প্রথম স্থান / কোর্স সম্পন্ন'})+F.text('শিরোনাম',`${b}.${L}.t`,{lang:1})
    +F.meta('বিস্তারিত',`${b}.${L}.m`)+F.img('ছবি (সার্টিফিকেট বা অনুষ্ঠানের ছবি)',b+'.img',{hint:'ছবি না দিলে একটা সুন্দর সার্টিফিকেট আঁকা দেখাবে।'})
